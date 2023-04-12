@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * The bishop
@@ -16,18 +17,26 @@ public class Bishop extends Piece
     }
 
     @Override
-    public boolean canMove() {
+    public ArrayList<Integer> possibleMoves() {
+        ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
         int idx = -1;
         if (this.getColor().equals("black")) {idx = 1;}
         try {
-            return board[pose[1]+idx][pose[0]] == null;
+            if (board[pose[1]+idx][pose[0]] == null) {
+                possibleMoves.add(pose[1]+idx);
+                possibleMoves.add(pose[0]);
+            }
         }
         catch (Exception e) {
             System.out.println("Exception caught!!!!!");
-            return false;
+            System.out.println(e);
         }
+        if (possibleMoves.size() == 0) {
+            System.out.println("No possible moves for the pawn");
+        }
+        return possibleMoves;
     }
     @Override
     public String toString() {
