@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Abstract class Piece - Abstract that all game pieces are
@@ -34,7 +35,7 @@ public abstract class Piece
     public String getColor() {
         return color.toLowerCase();
     }
-    public abstract boolean canMove();
+    public abstract ArrayList<Integer> possibleMoves();
     @Override
     public String toString() {
        return name + ", " + color; 

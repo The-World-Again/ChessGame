@@ -68,8 +68,9 @@ public class PieceHolder
         return whitePieces;
     }
     public static Piece getPiece(String color, int i) {
-        if (color.toLowerCase().equals("white")) {return whitePieces[i];}
-        else if (color.toLowerCase().equals("black")) {return blackPieces[i];}
+        color = color.toLowerCase();
+        if (color.equals("white")) {return whitePieces[i];}
+        else if (color.equals("black")) {return blackPieces[i];}
         else {System.out.println("not a color"); return null;}
     }
 }
