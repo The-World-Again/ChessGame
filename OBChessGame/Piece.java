@@ -26,6 +26,12 @@ public abstract class Piece
         int[] pose = {xPose, yPose};
         return pose;
     }
+    public int getX(){
+        return xPose;
+    }
+    public int getY(){
+        return yPose;
+    }
     public int getNum() {
         return pieceNumber;
     }

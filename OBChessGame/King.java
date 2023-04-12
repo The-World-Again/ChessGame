@@ -42,8 +42,8 @@ public class King extends Piece
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wp"+(this.getNum()+1);
+            return "wk"+(this.getNum()+1);
         }
-        else return "bp"+(this.getNum()+1);
+        else return "bk"+(this.getNum()+1);
     }
 }

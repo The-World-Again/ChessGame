@@ -40,8 +40,8 @@ public class Queen extends Piece
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wp"+(this.getNum()+1);
+            return "wq"+(this.getNum()+1);
         }
-        else return "bp"+(this.getNum()+1);
+        else return "bq"+(this.getNum()+1);
     }
 }

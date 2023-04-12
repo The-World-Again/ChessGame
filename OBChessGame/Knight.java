@@ -41,8 +41,8 @@ public class Knight extends Piece
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wp"+(this.getNum()+1);
+            return "wn"+(this.getNum()+1);
         }
-        else return "bp"+(this.getNum()+1);
+        else return "bn"+(this.getNum()+1);
     }
 }

@@ -5,8 +5,8 @@
  */
 public class PieceHolder
 {
-    static Piece[] whitePieces = new Piece[16];
-    static Piece[] blackPieces = new Piece[16];
+    public static Piece[] whitePieces = new Piece[16];
+    public static Piece[] blackPieces = new Piece[16];
     public PieceHolder()
     {
         int pieceNum = 0;
@@ -33,7 +33,7 @@ public class PieceHolder
         whitePieces[pieceNum] = new Queen("white",0,3,pieceNum);
         pieceNum++;
         //King
-        whitePieces[pieceNum] = new Bishop("white",7,4,pieceNum);
+        whitePieces[pieceNum] = new King("white",7,4,pieceNum);
         pieceNum++;
 
         pieceNum = 0;
@@ -60,13 +60,14 @@ public class PieceHolder
         blackPieces[pieceNum] = new Queen("black",7,3,pieceNum);
         pieceNum++;
         //King
-        whitePieces[pieceNum] = new Bishop("black",7,4,pieceNum);
+        whitePieces[pieceNum] = new King("black",7,4,pieceNum);
         pieceNum++;
         System.out.println(whitePieces);
     }
     public Piece[] getWhitePieces(){
         return whitePieces;
     }
+
     public static Piece getPiece(String color, int i) {
         color = color.toLowerCase();
         if (color.equals("white")) {return whitePieces[i];}
