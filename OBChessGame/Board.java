@@ -1,4 +1,3 @@
-
 /**
  * Chess board for chess
  * @Ori
