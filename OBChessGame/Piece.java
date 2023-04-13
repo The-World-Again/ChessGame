@@ -22,11 +22,7 @@ public abstract class Piece
      * Returns the current position of the piece
      * NOTE: THE ARRAY IS IN [Y,X] FORMAT
      */
-    public int[] getPose()
-    {
-        return new int[] {yPose, xPose};
-
-    }
+    public int[] getPose() {return new int[] {yPose, xPose};}
     public int getX(){
         return xPose;
     }

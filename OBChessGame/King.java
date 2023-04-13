@@ -26,8 +26,8 @@ public class King extends Piece
         if (this.getColor().equals("black")) {idx = 1;}
         try {
             if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[1]+idx);
-                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[0]+idx);
+                possibleMoves.add(pose[1]);
             }
         }
         catch (Exception e) {
@@ -35,7 +35,7 @@ public class King extends Piece
             System.out.println(e);
         }
         if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the pawn");
+            System.out.println("No possible moves for the king");
         }
         return possibleMoves;
     }

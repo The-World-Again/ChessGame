@@ -21,20 +21,44 @@ public class Knight extends Piece
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
-        int idx = -1;
-        if (this.getColor().equals("black")) {idx = 1;}
-        try {
-            if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[1]+idx);
-                possibleMoves.add(pose[0]);
+        int y = 1;
+        int x = 2;
+
+        for (int i = 1; i < 9; i++) {
+            try {
+                y = 1;
+                x = 2;
+                if (this.getColor().equals("black")) {
+                    y *= -1; x *= -1;
+                }
+                boolean down = false;
+                if (i % 2 == 0) {
+                    x = 1;
+                    y = 2;
+                    }
+                if (i % 4 > 2 || i % 4 == 0) {
+                    x *= -1;
+                    System.out.println("Horizontal flip!");
+                }
+                if (i > 4) {down = true;}
+                if (down) {y *= -1;}
+                System.out.println("i is " + i);
+                System.out.println(y + ", " + x);
+                System.out.println(board[pose[0]+y][pose[1]+x]);
+                if (board[pose[0]+y][pose[1]+x].getName().equals("   ")) {
+                    possibleMoves.add(pose[0]+y);
+                    possibleMoves.add(pose[1]+x);
+                    System.out.println("Success!");
+                }
             }
+            catch (Exception e) {
+                System.out.println("This is out of bounds");}
+            System.out.println("");
+
         }
-        catch (Exception e) {
-            System.out.println("Exception caught!!!!!");
-            System.out.println(e);
-        }
+
         if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the pawn");
+            System.out.println("No possible moves for the knight");
         }
         return possibleMoves;
     }
