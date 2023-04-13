@@ -34,33 +34,13 @@ public class Board
     }
 
     public void showBoard() {
-        chessBoard[3][3] = new Knight("black",3,3,5);
+        chessBoard[5][5] = new Knight("black",5,5,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
-        System.out.println(chessBoard[3][3].possibleMoves());
-    }
-    public static Piece[][] getBoard() {
-        return chessBoard;
-    }
-    public String allMoves(Piece p) {
-        int[] pose = p.getPose();
-        String allMoves = "";
-        ArrayList<Integer> moves = p.possibleMoves();
-        for (int i = 1; i < moves.size() + 1; i++) {
-            if (i % 2 != 0) {
-                allMoves += "(";
-            }
-            allMoves += moves.get(i - 1);
-            if (i % 2 == 0){
-                allMoves += ")";
-            }
-            if (i < moves.size()) {allMoves += ",";}
-        }
-        if (allMoves.length() == 0) {
-            return "This piece has no moves";
-        }
-        return allMoves;
+        //System.out.println(chessBoard[3][3].possibleMoves());
+        System.out.println(allMoves(chessBoard[5][5]));
+        System.out.println();
     }
     public String poseBuilder(int i) {
         String[] letters = {"A","B","C","D","E","F","G","H"};
@@ -70,6 +50,55 @@ public class Board
         }
         else {r = "ERROR";}
         return r;
+    }
+    public static Piece[][] getBoard() {
+        return chessBoard;
+    }
+    public String allMoves(Piece p) {
+        String allMoves = "";
+
+        String tempLetter = "";
+        ArrayList<String> letters = new ArrayList<String>();
+        ArrayList<Integer> moves = p.possibleMoves();
+        for (int i = 1; i < moves.size() + 1; i++) {
+            if (i % 2 != 0) {
+                tempLetter = poseBuilder(moves.get(i - 1));
+            } else {
+                letters.add(tempLetter + moves.get(i - 1));
+                tempLetter = "";
+            }
+        }
+        System.out.println();
+        if (letters.size() == 0) {
+            return "This piece has no moves";
+        }
+        else {
+            ArrayList<String> rString = new ArrayList<String>();
+            rString.add(letters.get(0));
+
+            for (int i = 1; i < letters.size(); i++) {
+                boolean added = false;
+                for (int d = 0; d < rString.size(); d++) {
+                    if (rString.get(d).substring(0,1).compareTo(letters.get(i).substring(0,1)) >= 0) {
+                        rString.add(d,letters.get(i));
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added) {rString.add(letters.get(i));}
+            }
+            System.out.println(rString);
+            for (int idx = 0; idx < rString.size(); idx++) {
+                allMoves += rString.get(idx);
+                if (idx == rString.size() - 2) {
+                    allMoves += ", or ";
+                } else if (idx <= rString.size() - 3) {
+                    allMoves += ", ";
+                }
+            }
+            System.out.println("");
+        }
+        return "This piece can go to " + allMoves;
     }
     public boolean canMove(Piece piece) {
         return !allMoves(piece).equals("This piece has no moves");

@@ -28,9 +28,6 @@ public class Knight extends Piece
             try {
                 y = 1;
                 x = 2;
-                if (this.getColor().equals("black")) {
-                    y *= -1; x *= -1;
-                }
                 boolean down = false;
                 if (i % 2 == 0) {
                     x = 1;
@@ -38,23 +35,15 @@ public class Knight extends Piece
                     }
                 if (i % 4 > 2 || i % 4 == 0) {
                     x *= -1;
-                    System.out.println("Horizontal flip!");
                 }
                 if (i > 4) {down = true;}
                 if (down) {y *= -1;}
-                System.out.println("i is " + i);
-                System.out.println(y + ", " + x);
-                System.out.println(board[pose[0]+y][pose[1]+x]);
                 if (board[pose[0]+y][pose[1]+x].getName().equals("   ")) {
                     possibleMoves.add(pose[0]+y);
                     possibleMoves.add(pose[1]+x);
-                    System.out.println("Success!");
                 }
             }
-            catch (Exception e) {
-                System.out.println("This is out of bounds");}
-            System.out.println("");
-
+            catch (Exception ignored) {}
         }
 
         if (possibleMoves.size() == 0) {

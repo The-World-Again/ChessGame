@@ -53,7 +53,7 @@ public class PieceHolder
         blackPieces[pieceNum] = new Knight("black",1,7,1);
         pieceNum++;
         blackPieces[pieceNum] = new Rook("black",1,8,1);
-        System.out.println(Arrays.toString(whitePieces));
+        //System.out.println(Arrays.toString(whitePieces));
     }
     public Piece[] getWhitePieces() {return whitePieces;}
     public Piece[] getBlackPieces() {return blackPieces;}
