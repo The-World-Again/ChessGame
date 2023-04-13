@@ -10,9 +10,9 @@ public class Pawn extends Piece
     /**
      * Constructor for objects of class Pawn
      */
-    public Pawn(String c, int x, int y, int nu)
+    public Pawn(String c, int y, int x, int nu)
     {
-        super(c,"pawn", x, y, nu);
+        super(c,"pawn", y, x, nu);
     }
     @Override
     public ArrayList<Integer> possibleMoves() {
@@ -22,9 +22,9 @@ public class Pawn extends Piece
         int idx = -1;
         if (this.getColor().equals("black")) {idx = 1;}
         try {
-            if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[1]+idx);
-                possibleMoves.add(pose[0]);
+            if (board[pose[0]][pose[1]+idx] == null) {
+                possibleMoves.add(pose[0]+idx);
+                possibleMoves.add(pose[1]);
             }
         }
         catch (Exception e) {

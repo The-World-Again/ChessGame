@@ -11,20 +11,21 @@ public abstract class Piece
     private int xPose = 0;
     private int yPose = 0;
     private int pieceNumber = 0;
-    public Piece (String c, String n, int startingX, int startingY, int nu) {
+    public Piece (String c, String n, int startingY, int startingX, int nu) {
         color = c;
         name = n;
-        xPose = startingX;
         yPose = startingY;
+        xPose = startingX;
         pieceNumber = nu;
     }
     /**
      * Returns the current position of the piece
+     * NOTE: THE ARRAY IS IN [Y,X] FORMAT
      */
     public int[] getPose()
     {
-        int[] pose = {xPose, yPose};
-        return pose;
+        return new int[] {yPose, xPose};
+
     }
     public int getX(){
         return xPose;

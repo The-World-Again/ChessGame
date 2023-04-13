@@ -1,72 +1,62 @@
+import java.util.Arrays;
 
 /**
  * The file that handles all the pieces
- * @Ori
+ * @Ori, Cameron
  */
 public class PieceHolder
 {
-    public static Piece[] whitePieces = new Piece[16];
-    public static Piece[] blackPieces = new Piece[16];
+    private static final Piece[] whitePieces = new Piece[16];
+    private static final Piece[] blackPieces = new Piece[16];
     public PieceHolder()
     {
         int pieceNum = 0;
         for (int i = 0; i < 8; i++) {
-            whitePieces[i] = new Pawn("white",1,i,pieceNum);
+            whitePieces[i] = new Pawn("white",6,i,pieceNum);
             pieceNum++;
         }
-        //rooks
-        whitePieces[pieceNum] = new Rook("white",0,0,pieceNum);
+        //Sets up the white pieces from left to right
+        whitePieces[pieceNum] = new Rook("white",7,1,0);
         pieceNum++;
-        whitePieces[pieceNum] = new Rook("white",0,7,pieceNum);
+        whitePieces[pieceNum] = new Knight("white",7,2,0);
         pieceNum++;
-        //knights
-        whitePieces[pieceNum] = new Knight("white",0,1,pieceNum);
+        whitePieces[pieceNum] = new Bishop("white",7,3,0);
         pieceNum++;
-        whitePieces[pieceNum] = new Knight("white",0,6,pieceNum);
+        whitePieces[pieceNum] = new Queen("white",7,4,0);
         pieceNum++;
-        //bishop
-        whitePieces[pieceNum] = new Bishop("white",0,2,pieceNum);
+        whitePieces[pieceNum] = new King("white",7,5,0);
         pieceNum++;
-        whitePieces[pieceNum] = new Bishop("white",0,5,pieceNum);
+        whitePieces[pieceNum] = new Bishop("white",7,6,1);
         pieceNum++;
-        //Queen
-        whitePieces[pieceNum] = new Queen("white",0,3,pieceNum);
+        whitePieces[pieceNum] = new Knight("white",7, 7,1);
         pieceNum++;
-        //King
-        whitePieces[pieceNum] = new King("white",7,4,pieceNum);
-        pieceNum++;
+        whitePieces[pieceNum] = new Rook("white",7,8,1);
 
         pieceNum = 0;
         for (int i = 0; i < 8; i++) {
-            blackPieces[i] = new Pawn("black",1,i,pieceNum);
+            blackPieces[i] = new Pawn("black",0,i,pieceNum);
             pieceNum++;
         }
-        //rooks
-        blackPieces[pieceNum] = new Rook("black",7,0,pieceNum);
+        //Sets up the black pieces from left to right
+        blackPieces[pieceNum] = new Rook("black",1,1,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Rook("black",7,7,pieceNum);
+        blackPieces[pieceNum] = new Knight("black",1,2,0);
         pieceNum++;
-        //knights
-        blackPieces[pieceNum] = new Knight("black",7,1,pieceNum);
+        blackPieces[pieceNum] = new Bishop("black",1,3,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Knight("black",7,6,pieceNum);
+        blackPieces[pieceNum] = new Queen("black",1,4,0);
         pieceNum++;
-        //bishop
-        blackPieces[pieceNum] = new Bishop("black",7,2,pieceNum);
+        blackPieces[pieceNum] = new King("black",1,5,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Bishop("black",7,5,pieceNum);
+        blackPieces[pieceNum] = new Bishop("black",1,6,1);
         pieceNum++;
-        //Queen
-        blackPieces[pieceNum] = new Queen("black",7,3,pieceNum);
+        blackPieces[pieceNum] = new Knight("black",1,7,1);
         pieceNum++;
-        //King
-        whitePieces[pieceNum] = new King("black",7,4,pieceNum);
-        pieceNum++;
-        System.out.println(whitePieces);
+        blackPieces[pieceNum] = new Rook("black",1,8,1);
+        System.out.println(Arrays.toString(whitePieces));
     }
-    public Piece[] getWhitePieces(){
-        return whitePieces;
-    }
+    public Piece[] getWhitePieces() {return whitePieces;}
+    public Piece[] getBlackPieces() {return blackPieces;}
 
     public static Piece getPiece(String color, int i) {
         color = color.toLowerCase();

@@ -11,9 +11,9 @@ public class King extends Piece
     /**
      * Constructor for objects of class King
      */
-    public King(String c, int x, int y, int nu)
+    public King(String c, int y, int x, int nu)
     {
-        super(c,"king", x, y, nu);
+        super(c,"king", y, x, nu);
         inCheck = false;
     }
 
@@ -39,11 +39,14 @@ public class King extends Piece
         }
         return possibleMoves;
     }
+    public boolean isInCheck(){
+        return inCheck;
+}
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wk"+(this.getNum()+1);
+            return "wk ";
         }
-        else return "bk"+(this.getNum()+1);
+        else return "bk ";
     }
 }

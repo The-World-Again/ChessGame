@@ -11,9 +11,9 @@ public class Rook extends Piece
     /**
      * Constructor for objects of class Rook
      */
-    public Rook(String c, int x, int y, int nu)
+    public Rook(String c, int y, int x, int nu)
     {
-        super(c,"rook", x, y, nu);
+        super(c,"rook", y, x, nu);
     }
 
     @Override

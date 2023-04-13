@@ -10,9 +10,9 @@ public class Queen extends Piece
     /**
      * Constructor for objects of class Queen
      */
-    public Queen(String c, int x, int y, int nu)
+    public Queen(String c, int y, int x, int nu)
     {
-        super(c, "queen", x, y, nu);
+        super(c, "queen", y, x, nu);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class Queen extends Piece
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wq"+(this.getNum()+1);
+            return "wq ";
         }
-        else return "bq"+(this.getNum()+1);
+        else return "bq ";
     }
 }
