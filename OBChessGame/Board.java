@@ -34,12 +34,13 @@ public class Board
     }
 
     public void showBoard() {
-        chessBoard[5][5] = new Knight("black",5,5,5);
+        chessBoard[4][3] = new Rook("black",4,3,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
-        //System.out.println(chessBoard[3][3].possibleMoves());
-        System.out.println(allMoves(chessBoard[5][5]));
+        System.out.println();
+        System.out.println(chessBoard[4][3].possibleMoves());
+        //System.out.println(allMoves(chessBoard[4][3]));
         System.out.println();
     }
     public String poseBuilder(int i) {

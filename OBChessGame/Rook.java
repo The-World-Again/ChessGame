@@ -21,18 +21,26 @@ public class Rook extends Piece
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
-        int idx = -1;
-        if (this.getColor().equals("black")) {idx = 1;}
         try {
-            if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[0]+idx);
+            for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("   "); y++) {
+                possibleMoves.add(pose[0]-y);
+                possibleMoves.add(pose[1]);
+            }
+            for (int x = 1; board[pose[0]][pose[1]-x].getName().equals("   "); x++) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1]-x);
+            }
+            for (int x = 1; board[pose[0]][pose[1]+x].getName().equals("   "); x++) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1]+x);
+            }
+            possibleMoves.add(000);
+            for (int y = 1; board[pose[0]+y][pose[1]].getName().equals("   "); y++) {
+                possibleMoves.add(pose[0]+y);
                 possibleMoves.add(pose[1]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Exception caught!!!!!");
-            System.out.println(e);
-        }
+        catch (Exception ignored) {}
         if (possibleMoves.size() == 0) {
             System.out.println("No possible moves for the rook");
         }
