@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 /**
  * The file that handles all the pieces
- * @Ori, Cameron
+ * @Ori,Cameron
  */
 public class PieceHolder
 {
@@ -38,21 +38,21 @@ public class PieceHolder
             pieceNum++;
         }
         //Sets up the black pieces from left to right
-        blackPieces[pieceNum] = new Rook("black",1,1,0);
+        blackPieces[pieceNum] = new Rook("black",0,1,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Knight("black",1,2,0);
+        blackPieces[pieceNum] = new Knight("black",0,2,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Bishop("black",1,3,0);
+        blackPieces[pieceNum] = new Bishop("black",0,3,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Queen("black",1,4,0);
+        blackPieces[pieceNum] = new Queen("black",0,4,0);
         pieceNum++;
-        blackPieces[pieceNum] = new King("black",1,5,0);
+        blackPieces[pieceNum] = new King("black",0,5,0);
         pieceNum++;
-        blackPieces[pieceNum] = new Bishop("black",1,6,1);
+        blackPieces[pieceNum] = new Bishop("black",0,6,1);
         pieceNum++;
-        blackPieces[pieceNum] = new Knight("black",1,7,1);
+        blackPieces[pieceNum] = new Knight("black",0,7,1);
         pieceNum++;
-        blackPieces[pieceNum] = new Rook("black",1,8,1);
+        blackPieces[pieceNum] = new Rook("black",0,8,1);
         //System.out.println(Arrays.toString(whitePieces));
     }
     public Piece[] getWhitePieces() {return whitePieces;}

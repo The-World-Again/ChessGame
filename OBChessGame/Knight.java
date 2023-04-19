@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * The knight
- * @Cameron
+ * @Cameron,Ori
  */
 public class Knight extends Piece
 {
@@ -44,10 +44,6 @@ public class Knight extends Piece
                 }
             }
             catch (Exception ignored) {}
-        }
-
-        if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the knight");
         }
         return possibleMoves;
     }

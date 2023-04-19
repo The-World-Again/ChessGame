@@ -32,9 +32,6 @@ public class Queen extends Piece
             System.out.println("Exception caught!!!!!");
             System.out.println(e);
         }
-        if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the queen");
-        }
         return possibleMoves;
     }
     @Override

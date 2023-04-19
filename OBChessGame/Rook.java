@@ -23,27 +23,29 @@ public class Rook extends Piece
         int[] pose = this.getPose();
         try {
             for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("   "); y++) {
-                possibleMoves.add(pose[0]-y);
+                possibleMoves.add(pose[0] - y);
                 possibleMoves.add(pose[1]);
+                if (pose[0]-y-2 < 0) {break;}
             }
+
             for (int x = 1; board[pose[0]][pose[1]-x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]);
-                possibleMoves.add(pose[1]-x);
+                possibleMoves.add(pose[1] - x);
             }
             for (int x = 1; board[pose[0]][pose[1]+x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]);
                 possibleMoves.add(pose[1]+x);
+                if (pose[1]+x+1 > 8) {break;}
             }
-            possibleMoves.add(000);
+
             for (int y = 1; board[pose[0]+y][pose[1]].getName().equals("   "); y++) {
                 possibleMoves.add(pose[0]+y);
                 possibleMoves.add(pose[1]);
             }
+
+
         }
         catch (Exception ignored) {}
-        if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the rook");
-        }
         return possibleMoves;
     }
 

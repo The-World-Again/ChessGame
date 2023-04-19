@@ -27,13 +27,9 @@ public class Pawn extends Piece
                 possibleMoves.add(pose[1]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Exception caught!!!!!");
-            System.out.println(e);
+        catch (Exception ignored) {
         }
-        if (possibleMoves.size() == 0) {
-            System.out.println("No possible moves for the pawn");
-        }
+
         return possibleMoves;
     }
     @Override
