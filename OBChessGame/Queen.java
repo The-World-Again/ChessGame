@@ -20,17 +20,50 @@ public class Queen extends Piece
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
-        int idx = -1;
-        if (this.getColor().equals("black")) {idx = 1;}
         try {
-            if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[0]+idx);
+            //Rook movement
+            for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("   "); y++) {
+                possibleMoves.add(pose[0] - y);
+                possibleMoves.add(pose[1]);
+                if (pose[0]-y-1 < 0) {break;}
+            }
+            for (int x = 1; board[pose[0]][pose[1]-x].getName().equals("   "); x++) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1] - x);
+            }
+            for (int x = 1; board[pose[0]][pose[1]+x].getName().equals("   "); x++) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1]+x);
+                if (pose[1]+x+1 > 8) {break;}
+            }
+            for (int y = 1; board[pose[0]+y][pose[1]].getName().equals("   "); y++) {
+                possibleMoves.add(pose[0]+y);
                 possibleMoves.add(pose[1]);
             }
+
+            //Bishop movement
+            for(int x = 1; board[pose[0]-x][pose[1]-x].getName().equals("   "); x++) {
+                possibleMoves.add(pose[0]-x);
+                possibleMoves.add(pose[1]-x);
+                if (pose[0]-x-1 < 0) {break;}
+            }
+            for (int x = 1; board[pose[0]-x][pose[1]+x].getName().equals("   ") ; x++) {
+                possibleMoves.add(pose[0]-x);
+                possibleMoves.add(pose[1]+x);
+                if (pose[0]-x-1 < 0 || pose[1]+x+1 > 8) {break;}
+            }
+            for (int x = 1; board[pose[0]+x][pose[1]-x].getName().equals("   ") ; x++) {
+                possibleMoves.add(pose[0]+x);
+                possibleMoves.add(pose[1]-x);
+            }
+            for (int x = 1; board[pose[0]+x][pose[1]+x].getName().equals("   ") ; x++) {
+                possibleMoves.add(pose[0]+x);
+                possibleMoves.add(pose[1]+x);
+                if (pose[1]+x+1 > 8) {break;}
+            }
         }
-        catch (Exception e) {
-            System.out.println("Exception caught!!!!!");
-            System.out.println(e);
+        catch (Exception ignored) {
+            System.out.println("ERROR");
         }
         return possibleMoves;
     }

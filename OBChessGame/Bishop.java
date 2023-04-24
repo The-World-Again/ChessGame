@@ -42,7 +42,9 @@ public class Bishop extends Piece
                 if (pose[1]+x+1 > 8) {break;}
             }
         }
-        catch (Exception ignored) { }
+        catch (Exception ignored) {
+            System.out.println("ERROR");
+        }
         return possibleMoves;
     }
     @Override

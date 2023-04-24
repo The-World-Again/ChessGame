@@ -19,15 +19,16 @@ public class Pawn extends Piece
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
-        int idx = -1;
-        if (this.getColor().equals("black")) {idx = 1;}
+        int x = -1;
+        if (this.getColor().equals("black")) {x = 1;}
         try {
-            if (board[pose[0]][pose[1]+idx] == null) {
-                possibleMoves.add(pose[0]+idx);
+            if (board[pose[0]][pose[1]+x].getName().equals("   ")) {
+                possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]);
             }
         }
         catch (Exception ignored) {
+            System.out.println("ERROR");
         }
 
         return possibleMoves;

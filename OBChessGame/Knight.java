@@ -43,7 +43,9 @@ public class Knight extends Piece
                     possibleMoves.add(pose[1]+x);
                 }
             }
-            catch (Exception ignored) {}
+            catch (Exception ignored) {
+                System.out.println("ERROR");
+            }
         }
         return possibleMoves;
     }

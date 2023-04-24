@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The king
@@ -22,17 +23,46 @@ public class King extends Piece
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
-        int idx = -1;
-        if (this.getColor().equals("black")) {idx = 1;}
         try {
-            if (board[pose[1]+idx][pose[0]] == null) {
-                possibleMoves.add(pose[0]+idx);
+            //Rook movements
+            if (pose[0]-2 >= 0 && board[pose[0]-1][pose[1]].getName().equals("   ")) {
+                possibleMoves.add(pose[0]-1);
                 possibleMoves.add(pose[1]);
             }
+
+            if (board[pose[0]][pose[1]-1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1]-1);
+            }
+            if (pose[1]+2 <= 8 && board[pose[0]][pose[1]+1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]);
+                possibleMoves.add(pose[1]+1);
+            }
+            if (board[pose[0]+1][pose[1]].getName().equals("   ")) {
+                possibleMoves.add(pose[0]+1);
+                possibleMoves.add(pose[1]);
+            }
+            //Bishop movements
+            if (pose[0]-2 >= 0 && board[pose[0]-1][pose[1]-1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]-1);
+                possibleMoves.add(pose[1]-1);
+            }
+            if (pose[0]-2 >= 0 && pose[1]+2 <= 8 && board[pose[0]-1][pose[1]+1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]-1);
+                possibleMoves.add(pose[1]+1);
+            }
+            if (board[pose[0]+1][pose[1]-1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]+1);
+                possibleMoves.add(pose[1]-1);
+            }
+            if (pose[1]+2 <= 8 && board[pose[0]+1][pose[1]+1].getName().equals("   ")) {
+                possibleMoves.add(pose[0]+1);
+                possibleMoves.add(pose[1]+1);
+            }
+
         }
-        catch (Exception e) {
-            System.out.println("Exception caught!!!!!");
-            System.out.println(e);
+        catch (Exception ignored) {
+            System.out.println("ERROR");
         }
         return possibleMoves;
     }
