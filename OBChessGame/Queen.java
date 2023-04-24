@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * The queen
- * @Cameron
+ * @Cameron, Ori
  */
 public class Queen extends Piece
 {

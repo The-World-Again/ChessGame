@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * The rook
- * @Cameron
+ * @Cameron, Ori
  */
 public class Rook extends Piece
 {

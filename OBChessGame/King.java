@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 /**
  * The king
- * @Cameron
+ * @Cameron, Ori
  */
 public class King extends Piece
 {
