@@ -37,9 +37,9 @@ public class Board
     }
     //Shows the board in its current state
     public void showBoard() {
-        int a = 4;
+        int a = 3;
         int b = 6;
-        chessBoard[a][b] = new King("black",a,b,5);
+        chessBoard[a][b] = new Rook("black",a,b,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
@@ -90,7 +90,10 @@ public class Board
                 boolean added = false;
                 for (int d = 0; d < rString.size(); d++) {
                     // Checks to see where the letter should be added
-                    if (rString.get(d).substring(0,1).compareTo(letters.get(i).substring(0,1)) > 0) {
+                    if(rString.get(d).equals(letters.get(i))) {
+                        break;
+                    }
+                    else if (rString.get(d).substring(0,1).compareTo(letters.get(i).substring(0,1)) > 0) {
                         rString.add(d,letters.get(i));
                         added = true;
                         break;

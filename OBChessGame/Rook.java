@@ -39,6 +39,10 @@ public class Rook extends Piece
             for (int y = 1; board[pose[0]+y][pose[1]].getName().equals("   "); y++) {
                 possibleMoves.add(pose[0]+y);
                 possibleMoves.add(pose[1]);
+                if(!board[pose[0]+y+1][pose[1]].getColor().equals(this.getColor())) {
+                    possibleMoves.add(pose[0]+y+1);
+                    possibleMoves.add(pose[1]);
+                }
             }
         }
         catch (Exception ignored) {
