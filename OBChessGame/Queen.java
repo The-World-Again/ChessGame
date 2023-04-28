@@ -21,7 +21,7 @@ public class Queen extends Piece
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
         try {
-            //Rook movement
+            //Orthogonal movement
             for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("   "); y++) {
                 possibleMoves.add(pose[0] - y);
                 possibleMoves.add(pose[1]);
@@ -41,7 +41,7 @@ public class Queen extends Piece
                 possibleMoves.add(pose[1]);
             }
 
-            //Bishop movement
+            //Diagonal movement
             for(int x = 1; board[pose[0]-x][pose[1]-x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]-x);

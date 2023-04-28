@@ -38,6 +38,11 @@ public abstract class Piece
     public String getColor() {
         return color.toLowerCase();
     }
+    public String otherColor() {
+        if (this.getColor().equals("white")) {return "black";}
+        else if (this.getColor().equals("black")){return "white";}
+        else {return "Not a game piece";}
+    }
     public abstract ArrayList<Integer> possibleMoves();
     @Override
     public String toString() {

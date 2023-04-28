@@ -37,9 +37,9 @@ public class Board
     }
     //Shows the board in its current state
     public void showBoard() {
-        int a = 3;
-        int b = 6;
-        chessBoard[a][b] = new Rook("black",a,b,5);
+        int a = 7;
+        int b = 5;
+        chessBoard[a][b] = new King("black",a,b,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
@@ -53,7 +53,7 @@ public class Board
         if (i < 7) {
             r = letters[i];
         }
-        else {r = "ERROR";}
+        else {r = "OUTOFBOUNDS";}
         return r;
     }
     //Gets the board
