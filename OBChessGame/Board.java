@@ -37,8 +37,8 @@ public class Board
     }
     //Shows the board in its current state
     public void showBoard() {
-        int a = 7;
-        int b = 5;
+        int a = 5;
+        int b = 6;
         chessBoard[a][b] = new King("black",a,b,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));

@@ -14,6 +14,7 @@ public class Pawn extends Piece
     {
         super(c,"pawn", y, x, nu);
     }
+    private static int totalPromotions = 0;
     @Override
     public ArrayList<Integer> possibleMoves() {
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
@@ -32,6 +33,12 @@ public class Pawn extends Piece
         }
 
         return possibleMoves;
+    }
+    public static void incrementPromotions() {
+        totalPromotions++;
+    }
+    public static int getPromotions() {
+        return totalPromotions;
     }
     @Override
     public String toString() {

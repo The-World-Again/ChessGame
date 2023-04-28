@@ -25,18 +25,37 @@ public class Bishop extends Piece
             for(int x = 1; board[pose[0]-x][pose[1]-x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]-x);
+                if (pose[0]-x-1 >= 0 && pose[1]-x-1 <= 8 &&
+                        (board[pose[0]-x-1][pose[1]-x-1].getName().equals("   ") ||
+                        board[pose[0]-x-1][pose[1]-x-1].getColor().equals(this.otherColor()))) {
+                    possibleMoves.add(pose[0]-x-1);
+                    possibleMoves.add(pose[1]-x-1);
+                }
                 if (pose[0]-x-1 < 0) {break;}
             }
-            for (int x = 1; board[pose[0]-x][pose[1]+x].getName().equals("   ") ; x++) {
+            for (int x = 1; board[pose[0]-x][pose[1]+x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]+x);
+                if (pose[0]-x-1 >= 0 && pose[1]+x+1 <= 8 &&
+                        (board[pose[0]-x-1][pose[1]+x+1].getName().equals("   ") ||
+                        board[pose[0]-x-1][pose[1]+x+1].getColor().equals(this.otherColor()))) {
+                    possibleMoves.add(pose[0]-x-1);
+                    possibleMoves.add(pose[1]+x+1);
+                }
                 if (pose[0]-x-1 < 0 || pose[1]+x+1 > 8) {break;}
             }
-            for (int x = 1; board[pose[0]+x][pose[1]-x].getName().equals("   ") ; x++) {
+            for (int x = 1; board[pose[0]+x][pose[1]-x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]-x);
+                if (board[pose[0]+x][pose[1-x]].getColor().equals(this.otherColor())) {break;}
+                if (pose[0]+x+1 >= 0 && pose[1]-x-1 <= 8 &&
+                        (board[pose[0]+x+1][pose[1]-x-1].getName().equals("   ") ||
+                        board[pose[0]+x+1][pose[1]-x-1].getColor().equals(this.otherColor()))) {
+                    possibleMoves.add(pose[0]+x+1);
+                    possibleMoves.add(pose[1]-x-1);
+                }
             }
-            for (int x = 1; board[pose[0]+x][pose[1]+x].getName().equals("   ") ; x++) {
+            for (int x = 1; board[pose[0]+x][pose[1]+x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]+x);
                 if (pose[1]+x+1 > 8) {break;}

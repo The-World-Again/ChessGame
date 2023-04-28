@@ -25,9 +25,8 @@ public class Rook extends Piece
             for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("   "); y++) {
                 possibleMoves.add(pose[0] - y);
                 possibleMoves.add(pose[1]);
-                if((pose[0]-y-1 >= 0) &&
-                        !(board[pose[0]-y-1][pose[1]].getColor().equals(this.getColor())) &&
-                        !(board[pose[0]-y-1][pose[1]].getColor().equals("none"))) {
+                if(pose[0]-y-1 >= 0 &&
+                        board[pose[0]-y-1][pose[1]].getColor().equals(this.otherColor())) {
                     possibleMoves.add(pose[0]-y-1);
                     possibleMoves.add(pose[1]);
                 }
@@ -36,8 +35,8 @@ public class Rook extends Piece
             for (int x = 1; board[pose[0]][pose[1]-x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]);
                 possibleMoves.add(pose[1]-x);
-                if((pose[0]-x-1 >= 0) && !(board[pose[0]-x-1][pose[1]].getColor().equals(this.getColor())) &&
-                        !(board[pose[0]-x-1][pose[1]].getColor().equals("none"))) {
+                if(pose[0]-x-1 >= 0 &&
+                        board[pose[0]-x-1][pose[1]].getColor().equals(this.otherColor())) {
                     possibleMoves.add(pose[0]-x-1);
                     possibleMoves.add(pose[1]);
                 }
@@ -45,9 +44,8 @@ public class Rook extends Piece
             for (int x = 1; board[pose[0]][pose[1]+x].getName().equals("   "); x++) {
                 possibleMoves.add(pose[0]);
                 possibleMoves.add(pose[1]+x);
-                if((pose[1]+x+1 <= 8) &&
-                        !(board[pose[0]][pose[1]+x+1].getColor().equals(this.getColor())) &&
-                        !(board[pose[0]][pose[1]+x+1].getColor().equals("none"))) {
+                if(pose[1]+x+1 <= 8 &&
+                        board[pose[0]][pose[1]+x+1].getColor().equals(this.otherColor())) {
                     possibleMoves.add(pose[0]+x+1);
                     possibleMoves.add(pose[1]);
                 }
@@ -56,9 +54,8 @@ public class Rook extends Piece
             for (int y = 1; board[pose[0]+y][pose[1]].getName().equals("   "); y++) {
                 possibleMoves.add(pose[0]+y);
                 possibleMoves.add(pose[1]);
-                if( (pose[0]+y+1 <= 8) &&
-                        !(board[pose[0]+y+1][pose[1]].getColor().equals(this.getColor())) &&
-                        !(board[pose[0]+y+1][pose[1]].getColor().equals("none"))) {
+                if(pose[0]+y+1 <= 8 &&
+                        board[pose[0]+y+1][pose[1]].getColor().equals(this.otherColor())) {
                     possibleMoves.add(pose[0]+y+1);
                     possibleMoves.add(pose[1]);
                 }
