@@ -23,9 +23,19 @@ public class Pawn extends Piece
         int x = -1;
         if (this.getColor().equals("black")) {x = 1;}
         try {
-            if (board[pose[0]][pose[1]+x].getName().equals("   ")) {
+            if (board[pose[0]+x][pose[1]].getName().equals("___") && pose[0]+x >= 0) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]);
+            }
+            if (board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()) &&
+            pose[0]+x >= 0 && pose[1]-x <= 8) {
+                possibleMoves.add(pose[0]+x);
+                possibleMoves.add(pose[1]-x);
+            }
+            if (board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()) &&
+            pose[0]+x >= 0 && pose[1]-x <= 8) {
+                possibleMoves.add(pose[0]+x);
+                possibleMoves.add(pose[1]+x);
             }
         }
         catch (Exception ignored) {
@@ -40,6 +50,13 @@ public class Pawn extends Piece
     public static int getPromotions() {
         return totalPromotions;
     }
+    public Piece promote(String s) {
+        s = s.toLowerCase().strip();
+        if(s.substring(s.length()-2,s.length()-1).equals(".")) {s = s.substring(0,s.length()-2);}
+        if (s.equals("knight")) {return null;}
+        else return null;
+    }
+
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {

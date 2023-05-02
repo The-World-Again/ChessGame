@@ -64,4 +64,15 @@ public class PieceHolder
         else if (color.equals("black")) {return blackPieces[i];}
         else {System.out.println("not a color"); return null;}
     }
+    public static void setPiece(String color, String pieceName, int i) {
+        color = color.toLowerCase();
+        pieceName = pieceName.toLowerCase();
+        Piece p;
+        if (color.equals("white")) {
+            p = whitePieces[i];
+            if (pieceName.equals("knight")) {p = new Knight(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}
+
+        whitePieces[i] = p;
+        }
+    }
 }

@@ -14,6 +14,9 @@ public class Board
         setBoard();
         showBoard();
     }
+    public void promote() {
+        System.out.println("That pawn has become a PLACEHOLDER");
+    }
     //Sets up the board for use
     public void setBoard() {
         //Establishes coordinates
@@ -21,7 +24,7 @@ public class Board
         String[] numbers = {"1","2","3","4","5","6","7","8"};
         for (int r = 0; r < chessBoard.length; r++) {
             for (int c = 0; c < chessBoard[0].length; c++) {
-                chessBoard[r][c] = new Information("   ");
+                chessBoard[r][c] = new Information("___");
                 if (c == 0 && r < 8) {chessBoard[r][c] = new Information(letters[r]);}
                 if ( r == 8 && c > 0) {chessBoard[r][c] = new Information(numbers[c-1]+"  ");}
                 if (r == 8 && c == 0) {chessBoard[r][c] = new Information(" ");}
@@ -37,9 +40,9 @@ public class Board
     }
     //Shows the board in its current state
     public void showBoard() {
-        int a = 5;
-        int b = 6;
-        chessBoard[a][b] = new King("black",a,b,5);
+        int a = 4;
+        int b = 5;
+        chessBoard[a][b] = new Queen("black",a,b,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
@@ -50,7 +53,7 @@ public class Board
     public String poseBuilder(int i) {
         String[] letters = {"A","B","C","D","E","F","G","H"};
         String r = "";
-        if (i < 7) {
+        if (i <= 7) {
             r = letters[i];
         }
         else {r = "OUTOFBOUNDS";}
@@ -63,8 +66,8 @@ public class Board
     //Returns the string for the player to see all possible plays
     public String allMoves(Piece p) {
         System.out.println("");
-
         String allMoves = "";
+
         // Sets up the coordinates gotten from a pieces possible moves
         // The first number of each pair is turned into a letter, then is concatenated with the second number
         String tempLetter = "";
@@ -109,13 +112,17 @@ public class Board
                 }
                 if (!added) {rString.add(letters.get(i));}
             }
-            // Implements the commas between coordinates
-            for (int idx = 0; idx < rString.size(); idx++) {
-                allMoves += rString.get(idx);
-                if (idx == rString.size() - 2) {
-                    allMoves += ", or ";
-                } else if (idx <= rString.size() - 3) {
-                    allMoves += ", ";
+            // Implements the commas between coordinates if necessary
+            if(moves.size() == 2) {allMoves += rString.get(0);}
+            if(moves.size() == 4) {allMoves += rString.get(0) + " or " + rString.get(1);}
+            else {
+                for (int idx = 0; idx < rString.size(); idx++) {
+                    allMoves += rString.get(idx);
+                    if (idx == rString.size() - 2) {
+                        allMoves += ", or ";
+                    } else if (idx <= rString.size() - 3) {
+                        allMoves += ", ";
+                    }
                 }
             }
         }

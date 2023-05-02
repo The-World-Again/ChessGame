@@ -38,7 +38,7 @@ public class Knight extends Piece
                 }
                 if (i > 4) {down = true;}
                 if (down) {y *= -1;}
-                if (board[pose[0]+y][pose[1]+x].getName().equals("   ") ||
+                if (board[pose[0]+y][pose[1]+x].getName().equals("___") ||
                         board[pose[0]+y][pose[1]+x].getColor().equals(this.otherColor())) {
                     possibleMoves.add(pose[0]+y);
                     possibleMoves.add(pose[1]+x);
