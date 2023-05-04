@@ -59,6 +59,17 @@ public class Board
         else {r = "OUTOFBOUNDS";}
         return r;
     }
+    //Converts letters into numbers
+    public int numberBuilder(String s) {
+        String[] letters = {"A","B","C","D","E","F","G","H"};
+        for (int i = 0; i < letters.length; i++) {
+            if (s.equals(letters[i])) {
+                return i;
+            }
+        }
+        return 404;
+    }
+
     //Gets the board
     public static Piece[][] getBoard() {
         return chessBoard;
@@ -132,5 +143,41 @@ public class Board
         String a = allMoves(piece);
         a = a.substring(0,27);
         return !a.equals("There are no possible moves");
+    }
+    //Moves a piece to a new position
+    //Assumes that the move and piece are valid selections
+    public void movePiece(String ogP, String newP) {
+        if(ogP.length() > 2 || newP.length() > 2) {
+            System.out.println("That is not a valid position");
+            System.out.println();
+            return;
+        }
+        int ogY = 0;
+        int ogX = 0;
+        int newY = 0;
+        int newX = 0;
+        try {
+            ogY = numberBuilder(ogP.substring(0, 1));
+            ogX = Integer.parseInt(ogP.substring(1));
+            newY = numberBuilder(newP.substring(0, 1));
+            newX = Integer.parseInt(newP.substring(1));
+        }
+        catch (Exception ignored) {
+            System.out.println("That is not a valid position");
+            System.out.println();
+            return;
+        }
+        if (ogY == 404 || ogX > 8 || newY == 404 || newX > 8) {
+            System.out.println("That is not a valid position");
+            System.out.println();
+            return;
+        }
+        Piece c = chessBoard[ogY][ogX];
+        System.out.println(c);
+        chessBoard[4][5] = new Information("___");
+        chessBoard[newY][newX] = c;
+        System.out.println();
+        System.out.println("The " + c.getName() + " has been moved to " + poseBuilder(newY) + newX);
+        System.out.println();
     }
 }
