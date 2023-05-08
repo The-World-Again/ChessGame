@@ -145,8 +145,14 @@ public class Board
         return !a.equals("There are no possible moves");
     }
     public Piece getPiece(String s) {
-        if (s.length() > 2) {
+        if (boardPosition(s) == null) {
             System.out.println("That is not a valid piece");
+        }
+        return chessBoard[boardPosition(s)[0]][boardPosition(s)[1]];
+    }
+    public int[] boardPosition(String s) {
+        if (s.length() > 2) {
+            System.out.println("That is not a valid position");
             return null;
         }
         int y = 404;
@@ -156,14 +162,14 @@ public class Board
             x = Integer.parseInt(s.substring(1));
         }
         catch (Exception ignored) {
-            System.out.println("That is not a valid piece");
+            System.out.println("That is not a valid position");
             return null;
         }
         if (y == 404) {
-            System.out.println("That is not a valid piece");
+            System.out.println("That is not a valid position");
             return null;
         }
-        return chessBoard[y][x];
+        return new int[]{y,x};
     }
     public boolean validMove(String s, Piece p) {
         for(int i = 1; i < p.possibleMoves().size();i += 2); {
