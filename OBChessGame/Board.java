@@ -144,8 +144,35 @@ public class Board
         a = a.substring(0,27);
         return !a.equals("There are no possible moves");
     }
+    public Piece getPiece(String s) {
+        if (s.length() > 2) {
+            System.out.println("That is not a valid piece");
+            return null;
+        }
+        int y = 404;
+        int x = 9;
+        try {
+            y = numberBuilder(s.substring(0, 1));
+            x = Integer.parseInt(s.substring(1));
+        }
+        catch (Exception ignored) {
+            System.out.println("That is not a valid piece");
+            return null;
+        }
+        if (y == 404) {
+            System.out.println("That is not a valid piece");
+            return null;
+        }
+        return chessBoard[y][x];
+    }
+    public boolean validMove(String s, Piece p) {
+        for(int i = 1; i < p.possibleMoves().size();i += 2); {
+
+        }
+        return false;
+    }
     //Moves a piece to a new position
-    //Assumes that the move and piece are valid selections
+    //Checks if the words are the right size and fit on the board
     public void movePiece(String ogP, String newP) {
         if(ogP.length() > 2 || newP.length() > 2) {
             System.out.println("That is not a valid position");

@@ -11,11 +11,7 @@ public class GameRunner
      */
     public static void main(String[] args)
     {
-        Board gameBoard = new Board();
-        gameBoard.newGame();
-        gameBoard.movePiece("E5","E6");
-        for (Piece[] pieces : Board.getBoard()) {
-            System.out.println(Arrays.toString(pieces));
-        }
+        GameHandler game = new GameHandler();
+        GameHandler.runGame();
     }
 }
