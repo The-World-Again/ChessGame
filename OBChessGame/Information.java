@@ -6,8 +6,7 @@ public class Information extends Piece {
     }
     @Override
     public ArrayList<Integer> possibleMoves() {
-        ArrayList<Integer> noMoves = new ArrayList<Integer>();
-        return noMoves;
+        return new ArrayList<Integer>();
     }
     @Override
     public String getType() {
