@@ -24,17 +24,17 @@ public class Board
         String[] numbers = {"1","2","3","4","5","6","7","8"};
         for (int r = 0; r < chessBoard.length; r++) {
             for (int c = 0; c < chessBoard[0].length; c++) {
-                chessBoard[r][c] = new Information("___");
-                if (c == 0 && r < 8) {chessBoard[r][c] = new Information(letters[r]);}
-                if ( r == 8 && c > 0) {chessBoard[r][c] = new Information(numbers[c-1]+"  ");}
-                if (r == 8 && c == 0) {chessBoard[r][c] = new Information(" ");}
+                chessBoard[r][c] = new Information("___",r,c);
+                if (c == 0 && r < 8) {chessBoard[r][c] = new Information(letters[r],r,c);}
+                if ( r == 8 && c > 0) {chessBoard[r][c] = new Information(numbers[c-1]+"  ",r,c);}
+                if (r == 8 && c == 0) {chessBoard[r][c] = new Information(" ",r,c);}
             }
         }
         //Sets up all pieces
         for(int i = 1; i < 9; i++) {
-            chessBoard[6][i] = PieceHolder.getPiece("white",i-1);
+            chessBoard[6][i] = PieceHolder.getPiece("white",i);
             chessBoard[7][i] = PieceHolder.getPiece("white",i+7);
-            chessBoard[1][i] = PieceHolder.getPiece("black",i-1);
+            chessBoard[1][i] = PieceHolder.getPiece("black",i);
             chessBoard[0][i] = PieceHolder.getPiece("black",i+7);
         }
     }
@@ -61,6 +61,7 @@ public class Board
     }
     //Converts letters into numbers
     public int numberBuilder(String s) {
+        s = s.toUpperCase();
         String[] letters = {"A","B","C","D","E","F","G","H"};
         for (int i = 0; i < letters.length; i++) {
             if (s.equals(letters[i])) {
@@ -151,12 +152,13 @@ public class Board
         return chessBoard[boardPosition(s)[0]][boardPosition(s)[1]];
     }
     public int[] boardPosition(String s) {
+        s = s.trim();
         if (s.length() > 2) {
             System.out.println("That is not a valid position");
             return null;
         }
-        int y = 404;
-        int x = 9;
+        int y = -1;
+        int x = -1;
         try {
             y = numberBuilder(s.substring(0, 1));
             x = Integer.parseInt(s.substring(1));
@@ -165,7 +167,7 @@ public class Board
             System.out.println("That is not a valid position");
             return null;
         }
-        if (y == 404) {
+        if (y == 404 || (x > 8 || x < 1)) {
             System.out.println("That is not a valid position");
             return null;
         }
@@ -179,38 +181,14 @@ public class Board
     }
     //Moves a piece to a new position
     //Checks if the words are the right size and fit on the board
-    public void movePiece(String ogP, String newP) {
-        if(ogP.length() > 2 || newP.length() > 2) {
-            System.out.println("That is not a valid position");
-            System.out.println();
-            return;
-        }
-        int ogY = 0;
-        int ogX = 0;
-        int newY = 0;
-        int newX = 0;
-        try {
-            ogY = numberBuilder(ogP.substring(0, 1));
-            ogX = Integer.parseInt(ogP.substring(1));
-            newY = numberBuilder(newP.substring(0, 1));
-            newX = Integer.parseInt(newP.substring(1));
-        }
-        catch (Exception ignored) {
-            System.out.println("That is not a valid position");
-            System.out.println();
-            return;
-        }
-        if (ogY == 404 || ogX > 8 || newY == 404 || newX > 8) {
-            System.out.println("That is not a valid position");
-            System.out.println();
-            return;
-        }
-        Piece c = chessBoard[ogY][ogX];
-        System.out.println(c);
-        chessBoard[4][5] = new Information("___");
-        chessBoard[newY][newX] = c;
+    public void movePiece(String ogPos, String newPos) {
+        Piece p = getPiece(ogPos);
+        int[] position = boardPosition(newPos);
+        System.out.println(p);
+        chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
+        chessBoard[position[0]][position[1]] = p;
         System.out.println();
-        System.out.println("The " + c.getName() + " has been moved to " + poseBuilder(newY) + newX);
+        System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
     }
 }

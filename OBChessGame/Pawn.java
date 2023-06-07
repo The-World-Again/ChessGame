@@ -52,11 +52,14 @@ public class Pawn extends Piece
     }
     public Piece promote(String s) {
         s = s.toLowerCase().strip();
-        if(s.substring(s.length()-2,s.length()-1).equals(".")) {s = s.substring(0,s.length()-2);}
+        if(s.charAt(s.length() - 2) == '.') {s = s.substring(0,s.length()-2);}
         if (s.equals("knight")) {return null;}
         else return null;
     }
-
+    @Override
+    public String getType() {
+        return "piece";
+    }
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {

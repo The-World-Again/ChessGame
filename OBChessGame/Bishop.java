@@ -60,6 +60,10 @@ public class Bishop extends Piece
         return possibleMoves;
     }
     @Override
+    public String getType() {
+        return "piece";
+    }
+    @Override
     public String toString() {
         if (this.getColor().equals("white")) {
             return "wb"+(this.getNum()+1);

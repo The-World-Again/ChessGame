@@ -78,9 +78,14 @@ public class King extends Piece
         }
         return possibleMoves;
     }
+
     public boolean isInCheck(){
         return inCheck;
 }
+    @Override
+    public String getType() {
+        return "piece";
+    }
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {

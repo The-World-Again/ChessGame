@@ -84,6 +84,10 @@ public class Queen extends Piece
         return possibleMoves;
     }
     @Override
+    public String getType() {
+        return "piece";
+    }
+    @Override
     public String toString() {
         if (this.getColor().equals("white")) {
             return "wq ";

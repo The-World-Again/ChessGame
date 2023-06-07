@@ -51,6 +51,10 @@ public class Knight extends Piece
         return possibleMoves;
     }
     @Override
+    public String getType() {
+        return "piece";
+    }
+    @Override
     public String toString() {
         if (this.getColor().equals("white")) {
             return "wn"+(this.getNum()+1);

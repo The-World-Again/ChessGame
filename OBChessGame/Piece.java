@@ -44,6 +44,7 @@ public abstract class Piece
         else {return "Not a game piece";}
     }
     public abstract ArrayList<Integer> possibleMoves();
+    public abstract String getType();
     @Override
     public String toString() {
        return name + ", " + color; 
