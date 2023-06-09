@@ -7,9 +7,15 @@ public class GameHandler {
     public static void runGame() {
         gameBoard.newGame();
         System.out.println();
-        int[] pickedPiece = PickPiece();
+        gameBoard.movePiece(new int[]{7,5},new int[]{1,5});
+        gameBoard.showBoard();
+        System.out.println(gameBoard.getPiece("wk"));
+        //int[] pickedPiece = PickPiece();
     }
-
+    public void gameCycle() {
+        gameBoard.newGame();
+        System.out.println();
+    }
     public static int[] PickPiece() {
         boolean white = (turnCount % 2 == 1);
         if (white) {
@@ -32,7 +38,7 @@ public class GameHandler {
             }
 
             Piece tempPiece = gameBoard.getPiece(input);
-            if (tempPiece.getType().equals("information")) {
+            if (tempPiece == null || tempPiece.getType().equals("information")) {
                 System.out.println("That is not a valid piece");
                 valid = false;
                 continue;
@@ -57,8 +63,23 @@ public class GameHandler {
             p = tempPiece;
         }
 
-        int[] move = {p.getY(),p.getX()};
-        System.out.println(Arrays.toString(move));
-        return move;
+        int[] piece = {p.getY(),p.getX()};
+        System.out.println(Arrays.toString(piece));
+        return piece;
+    }
+    public static int[] pickPosition() {
+        System.out.println("\nSelect a place to move that piece");
+        boolean valid = false;
+        int[] position = new int[2];
+        while (!valid) {
+            valid = true;
+            position = gameBoard.boardPosition(sc.nextLine().trim());
+            if (position == null) {
+                System.out.println("\nThat is not a valid spot");
+                valid = false;
+                continue;
+            }
+        }
+        return position;
     }
 }

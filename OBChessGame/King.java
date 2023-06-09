@@ -79,9 +79,32 @@ public class King extends Piece
         return possibleMoves;
     }
 
-    public boolean isInCheck(){
+    public boolean isInCheck() {
+        inCheck = false;
+        ArrayList<Integer> boardMoves = Board.literallyEveryMove();
+        int[] pose = this.getPose();
+        for(int i = 0; i < boardMoves.size(); i += 2) {
+            int[] move = {boardMoves.get(i),boardMoves.get(i+1)};
+            if(pose == move) {inCheck = true; break;}
+        }
         return inCheck;
-}
+    }
+    public ArrayList<Integer> availableMoves() {
+        ArrayList<Integer> kingMoves = this.possibleMoves();
+        ArrayList<Integer> boardMoves = Board.literallyEveryMove();
+
+        for(int i = 0; i < boardMoves.size(); i+= 2) {
+            for(int move = 0; move < kingMoves.size(); move+=2) {
+                if (kingMoves.get(move).equals(boardMoves.get(i)) &&
+                kingMoves.get(move+1).equals(boardMoves.get(i+1))) {
+                    kingMoves.remove(move+1);
+                    kingMoves.remove(move);
+                    move-=2;
+                }
+            }
+        }
+        return kingMoves;
+    }
     @Override
     public String getType() {
         return "piece";

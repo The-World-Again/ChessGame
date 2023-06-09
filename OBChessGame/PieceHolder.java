@@ -64,6 +64,10 @@ public class PieceHolder
         else if (color.equals("black")) {return blackPieces[i];}
         else {System.out.println("not a color"); return null;}
     }
+    public static Piece getPiece(String name) {
+        int[] pose = Board.findPiece(name);
+        return Board.getPiece(pose);
+    }
     public static void setPiece(String color, String pieceName, int i) {
         color = color.toLowerCase();
         pieceName = pieceName.toLowerCase();
@@ -71,8 +75,18 @@ public class PieceHolder
         if (color.equals("white")) {
             p = whitePieces[i];
             if (pieceName.equals("knight")) {p = new Knight(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}
-
-        whitePieces[i] = p;
+            if (pieceName.equals("bishop")) {{p = new Bishop(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
+            if (pieceName.equals("rook")) {{p = new Rook(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
+            if (pieceName.equals("queen")) {{p = new Queen(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
+            whitePieces[i] = p;
         }
+        else {
+            p = blackPieces[i];
+            if (pieceName.equals("knight")) {p = new Knight(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}
+            if (pieceName.equals("bishop")) {{p = new Bishop(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
+            if (pieceName.equals("rook")) {{p = new Rook(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
+            if (pieceName.equals("queen")) {{p = new Queen(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
+        }
+        blackPieces[i] = p;
     }
 }

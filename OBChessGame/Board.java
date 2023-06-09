@@ -32,9 +32,9 @@ public class Board
         }
         //Sets up all pieces
         for(int i = 1; i < 9; i++) {
-            chessBoard[6][i] = PieceHolder.getPiece("white",i);
+            chessBoard[6][i] = PieceHolder.getPiece("white",i-1);
             chessBoard[7][i] = PieceHolder.getPiece("white",i+7);
-            chessBoard[1][i] = PieceHolder.getPiece("black",i);
+            chessBoard[1][i] = PieceHolder.getPiece("black",i-1);
             chessBoard[0][i] = PieceHolder.getPiece("black",i+7);
         }
     }
@@ -42,12 +42,14 @@ public class Board
     public void showBoard() {
         int a = 4;
         int b = 5;
-        chessBoard[a][b] = new Queen("black",a,b,5);
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
+    }
+    public void checkPiece(int y, int x) {
+        chessBoard[y][x] = new Queen("black",y,x,5);
         //System.out.println(chessBoard[a][b].possibleMoves());
-        System.out.println(allMoves(chessBoard[a][b]));
+        System.out.println(allMoves(chessBoard[y][x]));
     }
     //Converts a number into its related letter
     public String poseBuilder(int i) {
@@ -140,21 +142,50 @@ public class Board
         }
         return "The " + p.getName() + " can go to " + allMoves;
     }
+    public static ArrayList<Integer> literallyEveryMove() {
+        ArrayList<Integer> moveHolder = new ArrayList<Integer>();
+        for (Piece[] pieces : chessBoard) {
+            for (Piece p : pieces) {
+                if (p.getType().equals("information")) {
+                    continue;
+                }
+                moveHolder.addAll(p.possibleMoves());
+            }
+        }
+        return moveHolder;
+    }
     public boolean canMove(Piece piece) {
         String a = allMoves(piece);
         a = a.substring(0,27);
         return !a.equals("There are no possible moves");
     }
-    public Piece getPiece(String s) {
-        if (boardPosition(s) == null) {
-            System.out.println("That is not a valid piece");
+    //Gets a piece at a specific position
+    public Piece getPiece(String position) {
+        if (boardPosition(position) == null) {
+            return null;
         }
-        return chessBoard[boardPosition(s)[0]][boardPosition(s)[1]];
+        return chessBoard[boardPosition(position)[0]][boardPosition(position)[1]];
+    }
+    public static Piece getPiece(int[] pose) {
+        if((pose[0] < 0 || pose[0] > 7) || (pose[1] < 1 || pose[1] > 8)) {
+            return null;
+        }
+        return chessBoard[pose[0]][pose[1]];
+    }
+    //Finds a requested piece
+    public static int[] findPiece(String name) {
+        for(Piece[] pieces : chessBoard) {
+            for(Piece p : pieces) {
+                if (p.toString().equals(name)) {
+                    return p.getPose();
+                }
+            }
+        }
+        return null;
     }
     public int[] boardPosition(String s) {
         s = s.trim();
         if (s.length() > 2) {
-            System.out.println("That is not a valid position");
             return null;
         }
         int y = -1;
@@ -164,11 +195,9 @@ public class Board
             x = Integer.parseInt(s.substring(1));
         }
         catch (Exception ignored) {
-            System.out.println("That is not a valid position");
             return null;
         }
         if (y == 404 || (x > 8 || x < 1)) {
-            System.out.println("That is not a valid position");
             return null;
         }
         return new int[]{y,x};
@@ -179,11 +208,21 @@ public class Board
         }
         return false;
     }
+
     //Moves a piece to a new position
     //Checks if the words are the right size and fit on the board
     public void movePiece(String ogPos, String newPos) {
         Piece p = getPiece(ogPos);
         int[] position = boardPosition(newPos);
+        System.out.println(p);
+        chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
+        chessBoard[position[0]][position[1]] = p;
+        System.out.println();
+        System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
+        System.out.println();
+    }
+    public void movePiece(int[] ogPos, int[] position) {
+        Piece p = chessBoard[ogPos[0]][ogPos[1]];
         System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
