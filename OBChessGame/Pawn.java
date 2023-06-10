@@ -10,9 +10,9 @@ public class Pawn extends Piece
     /**
      * Constructor for objects of class Pawn
      */
-    public Pawn(String c, int y, int x, int nu)
+    public Pawn(String c, int y, int x, int nu, int idx)
     {
-        super(c,"pawn", y, x, nu);
+        super(c,"pawn", y, x, nu, idx);
     }
     private static int totalPromotions = 0;
     @Override

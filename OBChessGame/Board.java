@@ -47,7 +47,7 @@ public class Board
         }
     }
     public void checkPiece(int y, int x) {
-        chessBoard[y][x] = new Queen("black",y,x,5);
+        chessBoard[y][x] = new Queen("black",y,x,5,-1);
         //System.out.println(chessBoard[a][b].possibleMoves());
         System.out.println(allMoves(chessBoard[y][x]));
     }
@@ -174,9 +174,10 @@ public class Board
     }
     //Finds a requested piece
     public static int[] findPiece(String name) {
+        name = name.toLowerCase().trim();
         for(Piece[] pieces : chessBoard) {
             for(Piece p : pieces) {
-                if (p.toString().equals(name)) {
+                if (p.toString().trim().equals(name)) {
                     return p.getPose();
                 }
             }
@@ -217,6 +218,7 @@ public class Board
         System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
+        PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
         System.out.println();
         System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
@@ -226,6 +228,7 @@ public class Board
         System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
+        PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
         System.out.println();
         System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();

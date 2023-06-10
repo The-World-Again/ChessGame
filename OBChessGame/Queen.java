@@ -10,9 +10,9 @@ public class Queen extends Piece
     /**
      * Constructor for objects of class Queen
      */
-    public Queen(String c, int y, int x, int nu)
+    public Queen(String c, int y, int x, int nu, int idx)
     {
-        super(c, "queen", y, x, nu);
+        super(c, "queen", y, x, nu, idx);
     }
 
     @Override

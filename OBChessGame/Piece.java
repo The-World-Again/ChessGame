@@ -8,15 +8,17 @@ public abstract class Piece
 {
     private String color = "";
     private String name = "";
-    private int xPose = 0;
     private int yPose = 0;
+    private int xPose = 0;
     private int pieceNumber = 0;
-    public Piece (String c, String n, int startingY, int startingX, int nu) {
+    private int index = 0;
+    public Piece (String c, String n, int startingY, int startingX, int nu, int idx) {
         color = c;
         name = n;
         yPose = startingY;
         xPose = startingX;
         pieceNumber = nu;
+        index = idx;
     }
     /**
      * Returns the current position of the piece
@@ -38,10 +40,17 @@ public abstract class Piece
     public String getColor() {
         return color.toLowerCase();
     }
+    public int getIndex() {
+        return index;
+    }
     public String otherColor() {
         if (this.getColor().equals("white")) {return "black";}
         else if (this.getColor().equals("black")){return "white";}
         else {return "Not a game piece";}
+    }
+    public void updatePose(int y, int x) {
+        yPose = y;
+        xPose = x;
     }
     public abstract ArrayList<Integer> possibleMoves();
     public abstract String getType();

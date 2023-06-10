@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Information extends Piece {
     public Information(String name,int y, int x) {
-        super("none",name,y,x,0);
+        super("none",name,y,x,-1, -1);
     }
     @Override
     public ArrayList<Integer> possibleMoves() {

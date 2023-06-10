@@ -9,7 +9,7 @@ public class GameHandler {
         System.out.println();
         gameBoard.movePiece(new int[]{7,5},new int[]{1,5});
         gameBoard.showBoard();
-        System.out.println(gameBoard.getPiece("wk"));
+        System.out.println(Arrays.toString(Board.findPiece("wk")));
         //int[] pickedPiece = PickPiece();
     }
     public void gameCycle() {

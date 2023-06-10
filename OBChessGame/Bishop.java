@@ -11,9 +11,9 @@ public class Bishop extends Piece
     /**
      * Constructor for objects of class Bishop
      */
-    public Bishop(String c, int y, int x, int nu)
+    public Bishop(String c, int y, int x, int nu, int idx)
     {
-        super(c,"bishop", y, x, nu);
+        super(c,"bishop", y, x, nu, idx);
     }
 
     @Override

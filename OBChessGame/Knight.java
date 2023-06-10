@@ -11,9 +11,9 @@ public class Knight extends Piece
     /**
      * Constructor for objects of class Knight
      */
-    public Knight(String c, int y, int x, int nu)
+    public Knight(String c, int y, int x, int nu, int idx)
     {
-        super(c,"knight", y, x, nu);
+        super(c,"knight", y, x, nu, idx);
     }
 
     @Override

@@ -12,47 +12,47 @@ public class PieceHolder
     {
         int pieceNum = 0;
         for (int i = 0; i < 8; i++) {
-            whitePieces[i] = new Pawn("white",6,i,pieceNum);
+            whitePieces[i] = new Pawn("white",6,i,pieceNum,i);
             pieceNum++;
         }
         //Sets up the white pieces from left to right
-        whitePieces[pieceNum] = new Rook("white",7,1,0);
+        whitePieces[pieceNum] = new Rook("white",7,1,0,8);
         pieceNum++;
-        whitePieces[pieceNum] = new Knight("white",7,2,0);
+        whitePieces[pieceNum] = new Knight("white",7,2,0,9);
         pieceNum++;
-        whitePieces[pieceNum] = new Bishop("white",7,3,0);
+        whitePieces[pieceNum] = new Bishop("white",7,3,0,10);
         pieceNum++;
-        whitePieces[pieceNum] = new Queen("white",7,4,0);
+        whitePieces[pieceNum] = new Queen("white",7,4,0,11);
         pieceNum++;
-        whitePieces[pieceNum] = new King("white",7,5,0);
+        whitePieces[pieceNum] = new King("white",7,5,0,12);
         pieceNum++;
-        whitePieces[pieceNum] = new Bishop("white",7,6,1);
+        whitePieces[pieceNum] = new Bishop("white",7,6,1,13);
         pieceNum++;
-        whitePieces[pieceNum] = new Knight("white",7, 7,1);
+        whitePieces[pieceNum] = new Knight("white",7, 7,1,14);
         pieceNum++;
-        whitePieces[pieceNum] = new Rook("white",7,8,1);
+        whitePieces[pieceNum] = new Rook("white",7,8,1,15);
 
         pieceNum = 0;
         for (int i = 0; i < 8; i++) {
-            blackPieces[i] = new Pawn("black",0,i,pieceNum);
+            blackPieces[i] = new Pawn("black",0,i,pieceNum,i);
             pieceNum++;
         }
         //Sets up the black pieces from left to right
-        blackPieces[pieceNum] = new Rook("black",0,1,0);
+        blackPieces[pieceNum] = new Rook("black",0,1,0,8);
         pieceNum++;
-        blackPieces[pieceNum] = new Knight("black",0,2,0);
+        blackPieces[pieceNum] = new Knight("black",0,2,0,9);
         pieceNum++;
-        blackPieces[pieceNum] = new Bishop("black",0,3,0);
+        blackPieces[pieceNum] = new Bishop("black",0,3,0,10);
         pieceNum++;
-        blackPieces[pieceNum] = new Queen("black",0,4,0);
+        blackPieces[pieceNum] = new Queen("black",0,4,0,11);
         pieceNum++;
-        blackPieces[pieceNum] = new King("black",0,5,0);
+        blackPieces[pieceNum] = new King("black",0,5,0,12);
         pieceNum++;
-        blackPieces[pieceNum] = new Bishop("black",0,6,1);
+        blackPieces[pieceNum] = new Bishop("black",0,6,1,13);
         pieceNum++;
-        blackPieces[pieceNum] = new Knight("black",0,7,1);
+        blackPieces[pieceNum] = new Knight("black",0,7,1,14);
         pieceNum++;
-        blackPieces[pieceNum] = new Rook("black",0,8,1);
+        blackPieces[pieceNum] = new Rook("black",0,8,1,15);
         //System.out.println(Arrays.toString(whitePieces));
     }
     public Piece[] getWhitePieces() {return whitePieces;}
@@ -68,24 +68,33 @@ public class PieceHolder
         int[] pose = Board.findPiece(name);
         return Board.getPiece(pose);
     }
+    public static void updatePosition(String color, int idx,int y,int x) {
+        boolean white = color.toLowerCase().trim().equals("white");
+        if (white) {
+            whitePieces[idx].updatePose(y,x);
+        }
+        else {
+            whitePieces[idx].updatePose(y,x);
+        }
+    }
     public static void setPiece(String color, String pieceName, int i) {
         color = color.toLowerCase();
         pieceName = pieceName.toLowerCase();
         Piece p;
         if (color.equals("white")) {
             p = whitePieces[i];
-            if (pieceName.equals("knight")) {p = new Knight(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}
-            if (pieceName.equals("bishop")) {{p = new Bishop(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
-            if (pieceName.equals("rook")) {{p = new Rook(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
-            if (pieceName.equals("queen")) {{p = new Queen(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum());}}
+            if (pieceName.equals("knight")) {p = new Knight(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum(),whitePieces[i].getIndex());}
+            if (pieceName.equals("bishop")) {p = new Bishop(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum(),whitePieces[i].getIndex());}
+            if (pieceName.equals("rook")) {p = new Rook(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum(),whitePieces[i].getIndex());}
+            if (pieceName.equals("queen")) {p = new Queen(color,whitePieces[i].getY(),whitePieces[i].getX(),whitePieces[i].getNum(),whitePieces[i].getIndex());}
             whitePieces[i] = p;
         }
         else {
             p = blackPieces[i];
-            if (pieceName.equals("knight")) {p = new Knight(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}
-            if (pieceName.equals("bishop")) {{p = new Bishop(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
-            if (pieceName.equals("rook")) {{p = new Rook(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
-            if (pieceName.equals("queen")) {{p = new Queen(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum());}}
+            if (pieceName.equals("knight")) {p = new Knight(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum(),blackPieces[i].getIndex());}
+            if (pieceName.equals("bishop")) {p = new Bishop(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum(),blackPieces[i].getIndex());}
+            if (pieceName.equals("rook")) {p = new Rook(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum(),blackPieces[i].getIndex());}
+            if (pieceName.equals("queen")) {p = new Queen(color,blackPieces[i].getY(),blackPieces[i].getX(),blackPieces[i].getNum(),blackPieces[i].getIndex());}
         }
         blackPieces[i] = p;
     }

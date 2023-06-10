@@ -12,9 +12,9 @@ public class King extends Piece
     /**
      * Constructor for objects of class King
      */
-    public King(String c, int y, int x, int nu)
+    public King(String c, int y, int x, int nu, int idx)
     {
-        super(c,"king", y, x, nu);
+        super(c,"king", y, x, nu, idx);
         inCheck = false;
     }
 
