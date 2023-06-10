@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Pawn extends Piece
 {
-    boolean firstMove = false;
+    boolean firstMove = true;
     /**
      * Constructor for objects of class Pawn
      */
@@ -14,7 +14,6 @@ public class Pawn extends Piece
     {
         super(c,"pawn", y, x, nu, idx);
     }
-    private static int totalPromotions = 0;
     @Override
     public ArrayList<Integer> possibleMoves() {
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
@@ -25,6 +24,10 @@ public class Pawn extends Piece
         try {
             if (board[pose[0]+x][pose[1]].getName().equals("___") && pose[0]+x >= 0) {
                 possibleMoves.add(pose[0]+x);
+                possibleMoves.add(pose[1]);
+            }
+            if(board[pose[0]+(2*x)][pose[1]].getName().equals("___")&& pose[0]+(2*x) >= 0) {
+                possibleMoves.add(pose[0]+(2*x));
                 possibleMoves.add(pose[1]);
             }
             if (board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()) &&
@@ -44,17 +47,8 @@ public class Pawn extends Piece
 
         return possibleMoves;
     }
-    public static void incrementPromotions() {
-        totalPromotions++;
-    }
-    public static int getPromotions() {
-        return totalPromotions;
-    }
-    public Piece promote(String s) {
-        s = s.toLowerCase().strip();
-        if(s.charAt(s.length() - 2) == '.') {s = s.substring(0,s.length()-2);}
-        if (s.equals("knight")) {return null;}
-        else return null;
+    public void updateFirstMove() {
+        firstMove = false;
     }
     @Override
     public String getType() {

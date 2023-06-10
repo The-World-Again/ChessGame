@@ -53,6 +53,9 @@ public abstract class Piece
         xPose = x;
     }
     public abstract ArrayList<Integer> possibleMoves();
+    public ArrayList<Integer> availableMoves() {
+        return possibleMoves();
+    }
     public abstract String getType();
     @Override
     public String toString() {

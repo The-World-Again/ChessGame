@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * The file that handles all the pieces
  * @Ori,Cameron
@@ -31,7 +29,6 @@ public class PieceHolder
         whitePieces[pieceNum] = new Knight("white",7, 7,1,14);
         pieceNum++;
         whitePieces[pieceNum] = new Rook("white",7,8,1,15);
-
         pieceNum = 0;
         for (int i = 0; i < 8; i++) {
             blackPieces[i] = new Pawn("black",0,i,pieceNum,i);
@@ -55,8 +52,6 @@ public class PieceHolder
         blackPieces[pieceNum] = new Rook("black",0,8,1,15);
         //System.out.println(Arrays.toString(whitePieces));
     }
-    public Piece[] getWhitePieces() {return whitePieces;}
-    public Piece[] getBlackPieces() {return blackPieces;}
 
     public static Piece getPiece(String color, int i) {
         color = color.toLowerCase();
@@ -66,6 +61,7 @@ public class PieceHolder
     }
     public static Piece getPiece(String name) {
         int[] pose = Board.findPiece(name);
+        assert pose != null;
         return Board.getPiece(pose);
     }
     public static void updatePosition(String color, int idx,int y,int x) {

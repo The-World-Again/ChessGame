@@ -8,13 +8,12 @@ public class Board
     //2D array representing the board
     static Piece[][] chessBoard = new Piece[9][9];
     //Holds all game pieces for each color
-    PieceHolder pieceHolder = new PieceHolder();
-
     public void newGame() {
         setBoard();
         showBoard();
     }
-    public void promote() {
+    PieceHolder pieceHolder = new PieceHolder();
+    public static void promote() {
         System.out.println("That pawn has become a PLACEHOLDER");
     }
     //Sets up the board for use
@@ -40,19 +39,17 @@ public class Board
     }
     //Shows the board in its current state
     public void showBoard() {
-        int a = 4;
-        int b = 5;
         for (Piece[] pieces : chessBoard) {
             System.out.println(Arrays.toString(pieces));
         }
     }
-    public void checkPiece(int y, int x) {
+    public static void checkPiece(int y, int x) {
         chessBoard[y][x] = new Queen("black",y,x,5,-1);
         //System.out.println(chessBoard[a][b].possibleMoves());
         System.out.println(allMoves(chessBoard[y][x]));
     }
     //Converts a number into its related letter
-    public String poseBuilder(int i) {
+    public static String poseBuilder(int i) {
         String[] letters = {"A","B","C","D","E","F","G","H"};
         String r = "";
         if (i <= 7) {
@@ -62,7 +59,7 @@ public class Board
         return r;
     }
     //Converts letters into numbers
-    public int numberBuilder(String s) {
+    public static int numberBuilder(String s) {
         s = s.toUpperCase();
         String[] letters = {"A","B","C","D","E","F","G","H"};
         for (int i = 0; i < letters.length; i++) {
@@ -78,7 +75,7 @@ public class Board
         return chessBoard;
     }
     //Returns the string for the player to see all possible plays
-    public String allMoves(Piece p) {
+    public static String allMoves(Piece p) {
         System.out.println("");
         String allMoves = "";
 
@@ -204,8 +201,13 @@ public class Board
         return new int[]{y,x};
     }
     public boolean validMove(String s, Piece p) {
-        for(int i = 1; i < p.possibleMoves().size();i += 2); {
-
+        int[] pos = boardPosition(s);
+        ArrayList<Integer> moves = p.possibleMoves();
+        for(int i = 0; i < p.possibleMoves().size();i += 2) {
+            assert pos != null;
+            if(moves.get(i).equals(pos[0]) && moves.get(i+1).equals(pos[1])) {
+                return true;
+            }
         }
         return false;
     }
@@ -223,7 +225,7 @@ public class Board
         System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
     }
-    public void movePiece(int[] ogPos, int[] position) {
+    public static void movePiece(int[] ogPos, int[] position) {
         Piece p = chessBoard[ogPos[0]][ogPos[1]];
         System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());

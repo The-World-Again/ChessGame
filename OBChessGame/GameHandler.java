@@ -1,22 +1,23 @@
 import java.util.Arrays;
 import java.util.Scanner;
 public class GameHandler {
-    static Board gameBoard = new Board();
     static Scanner sc = new Scanner(System.in);
     static int turnCount = 1;
-    public static void runGame() {
+    Board gameBoard = new Board();
+    public void runGame() {
         gameBoard.newGame();
         System.out.println();
-        gameBoard.movePiece(new int[]{7,5},new int[]{1,5});
+        Board.movePiece(new int[]{7,5},new int[]{2,5});
         gameBoard.showBoard();
-        System.out.println(Arrays.toString(Board.findPiece("wk")));
+        System.out.println(gameBoard.getPiece("C5").availableMoves());
+        System.out.println();
         //int[] pickedPiece = PickPiece();
     }
     public void gameCycle() {
         gameBoard.newGame();
         System.out.println();
     }
-    public static int[] PickPiece() {
+    public int[] PickPiece() {
         boolean white = (turnCount % 2 == 1);
         if (white) {
             System.out.println("It is white's turn. \nSelect a piece to move\n");
@@ -67,7 +68,7 @@ public class GameHandler {
         System.out.println(Arrays.toString(piece));
         return piece;
     }
-    public static int[] pickPosition() {
+    public int[] pickPosition() {
         System.out.println("\nSelect a place to move that piece");
         boolean valid = false;
         int[] position = new int[2];
