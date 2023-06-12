@@ -52,13 +52,13 @@ public class Rook extends Piece
             }
         }
         catch (Exception ignored) {
-            System.out.println("ERROR");
+            //System.out.println("ROOK ERROR");
         }
         return possibleMoves;
     }
     @Override
     public String getType() {
-        return "piece";
+        return "rook";
     }
     @Override
     public String toString() {

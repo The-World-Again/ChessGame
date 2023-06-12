@@ -79,13 +79,13 @@ public class Queen extends Piece
             }
         }
         catch (Exception ignored) {
-            System.out.println("ERROR");
+            //System.out.println("QUEEN ERROR");
         }
         return possibleMoves;
     }
     @Override
     public String getType() {
-        return "piece";
+        return "queen";
     }
     @Override
     public String toString() {

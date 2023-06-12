@@ -42,7 +42,7 @@ public class Pawn extends Piece
             }
         }
         catch (Exception ignored) {
-            System.out.println("ERROR");
+           // System.out.println("PAWN ERROR");
         }
 
         return possibleMoves;
@@ -52,7 +52,7 @@ public class Pawn extends Piece
     }
     @Override
     public String getType() {
-        return "piece";
+        return "pawn";
     }
     @Override
     public String toString() {

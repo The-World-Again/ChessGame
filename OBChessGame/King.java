@@ -25,7 +25,7 @@ public class King extends Piece
         int[] pose = this.getPose();
         try {
             //Orthogonal movements
-            if (pose[0]-2 >= 0 && (board[pose[0]-1][pose[1]].getName().equals("___") ||
+            if (pose[0]-1 >= 0 && (board[pose[0]-1][pose[1]].getName().equals("___") ||
                     board[pose[0]-1][pose[1]].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]-1);
                 possibleMoves.add(pose[1]);
@@ -36,7 +36,7 @@ public class King extends Piece
                 possibleMoves.add(pose[0]);
                 possibleMoves.add(pose[1]-1);
             }
-            if (pose[1]+2 <= 8 &&
+            if (pose[1]+1 <= 8 &&
                     (board[pose[0]][pose[1]+1].getName().equals("___") ||
                     board[pose[0]][pose[1]+1].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]);
@@ -48,13 +48,13 @@ public class King extends Piece
                 possibleMoves.add(pose[1]);
             }
             //Diagonal movements
-            if (pose[0]-2 >= 0 &&
+            if (pose[0]-1 >= 0 &&
                     (board[pose[0]-1][pose[1]-1].getName().equals("___") ||
                             board[pose[0]-1][pose[1]-1].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]-1);
                 possibleMoves.add(pose[1]-1);
             }
-            if (pose[0]-2 >= 0 && pose[1]+2 <= 8 &&
+            if (pose[0]-1 >= 0 && pose[1]+1 <= 8 &&
                     (board[pose[0]-1][pose[1]+1].getName().equals("___") ||
                             board[pose[0]-1][pose[1]+1].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]-1);
@@ -65,7 +65,7 @@ public class King extends Piece
                 possibleMoves.add(pose[0]+1);
                 possibleMoves.add(pose[1]-1);
             }
-            if (pose[1]+2 <= 8 &&
+            if (pose[1]+1 <= 8 &&
                     (board[pose[0]+1][pose[1]+1].getName().equals("___") ||
                             board[pose[0]+1][pose[1]+1].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]+1);
@@ -73,15 +73,15 @@ public class King extends Piece
             }
 
         }
-        catch (Exception e) {
-            throw e;
+        catch (Exception ignored) {
+            //System.out.println("KING ERROR");
         }
         return possibleMoves;
     }
     public ArrayList<Integer> availableMoves() {
 
         ArrayList<Integer> kingMoves = possibleMoves();
-        ArrayList<Integer> boardMoves = Board.literallyEveryMove();
+        ArrayList<Integer> boardMoves = Board.literallyEveryMove(this);
 
         for(int i = 0; i < boardMoves.size(); i+= 2) {
             for(int move = 0; move < kingMoves.size(); move+=2) {
@@ -90,6 +90,7 @@ public class King extends Piece
                     kingMoves.remove(move+1);
                     kingMoves.remove(move);
                     move-=2;
+                    //System.out.println("removed move");
                 }
             }
         }
@@ -97,7 +98,7 @@ public class King extends Piece
     }
     public boolean isInCheck() {
         inCheck = false;
-        ArrayList<Integer> boardMoves = Board.literallyEveryMove();
+        ArrayList<Integer> boardMoves = Board.literallyEveryMove(this);
         int[] pose = this.getPose();
         for(int i = 0; i < boardMoves.size(); i += 2) {
             int[] move = {boardMoves.get(i),boardMoves.get(i+1)};
@@ -107,7 +108,7 @@ public class King extends Piece
     }
     @Override
     public String getType() {
-        return "piece";
+        return "king";
     }
     @Override
     public String toString() {

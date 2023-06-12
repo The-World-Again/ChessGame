@@ -7,9 +7,11 @@ public class GameHandler {
     public void runGame() {
         gameBoard.newGame();
         System.out.println();
-        Board.movePiece(new int[]{7,5},new int[]{2,5});
+        //System.out.println(gameBoard.getPiece("H5").getColor());
+        gameBoard.movePiece("H5","D5");
+       // System.out.println(gameBoard.getPiece("D5").getColor());
         gameBoard.showBoard();
-        System.out.println(gameBoard.getPiece("C5").availableMoves());
+        System.out.println(Board.allMoves(gameBoard.getPiece("D5")));
         System.out.println();
         //int[] pickedPiece = PickPiece();
     }

@@ -55,13 +55,13 @@ public class Bishop extends Piece
             }
         }
         catch (Exception ignored) {
-            System.out.println("ERROR");
+            //System.out.println("BISHOP ERROR");
         }
         return possibleMoves;
     }
     @Override
     public String getType() {
-        return "piece";
+        return "bishop";
     }
     @Override
     public String toString() {

@@ -45,14 +45,14 @@ public class Knight extends Piece
                 }
             }
             catch (Exception ignored) {
-                System.out.println("ERROR");
+                //System.out.println("KNIGHT ERROR");
             }
         }
         return possibleMoves;
     }
     @Override
     public String getType() {
-        return "piece";
+        return "knight";
     }
     @Override
     public String toString() {

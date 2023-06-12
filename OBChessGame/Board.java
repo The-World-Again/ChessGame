@@ -83,7 +83,7 @@ public class Board
         // The first number of each pair is turned into a letter, then is concatenated with the second number
         String tempLetter = "";
         ArrayList<String> letters = new ArrayList<String>();
-        ArrayList<Integer> moves = p.possibleMoves();
+        ArrayList<Integer> moves = p.availableMoves();
         for (int i = 1; i < moves.size() + 1; i++) {
             if (i % 2 != 0) {
                 tempLetter = poseBuilder(moves.get(i - 1));
@@ -137,16 +137,18 @@ public class Board
                 }
             }
         }
-        return "The " + p.getName() + " can go to " + allMoves;
+        return "The " + p.getColor() + " " + p.getName() + " can go to " + allMoves;
     }
-    public static ArrayList<Integer> literallyEveryMove() {
+    public static ArrayList<Integer> literallyEveryMove(Piece picked) {
         ArrayList<Integer> moveHolder = new ArrayList<Integer>();
         for (Piece[] pieces : chessBoard) {
             for (Piece p : pieces) {
-                if (p.getType().equals("information")) {
+                if (p.getType().equals("information")|| p.getColor().equals(picked.getColor()) || p.equals(picked)) {
+                    //System.out.println("skipped");
                     continue;
                 }
                 moveHolder.addAll(p.possibleMoves());
+                //System.out.println(p.toString());
             }
         }
         return moveHolder;
@@ -222,7 +224,7 @@ public class Board
         chessBoard[position[0]][position[1]] = p;
         PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
         System.out.println();
-        System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
+        System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
     }
     public static void movePiece(int[] ogPos, int[] position) {
@@ -232,7 +234,7 @@ public class Board
         chessBoard[position[0]][position[1]] = p;
         PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
         System.out.println();
-        System.out.println("The " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
+        System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
     }
 }
