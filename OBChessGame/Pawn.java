@@ -26,7 +26,7 @@ public class Pawn extends Piece
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]);
             }
-            if(board[pose[0]+(2*x)][pose[1]].getName().equals("___")&& pose[0]+(2*x) >= 0) {
+            if(firstMove && board[pose[0]+(2*x)][pose[1]].getName().equals("___") && pose[0]+(2*x) >= 0) {
                 possibleMoves.add(pose[0]+(2*x));
                 possibleMoves.add(pose[1]);
             }

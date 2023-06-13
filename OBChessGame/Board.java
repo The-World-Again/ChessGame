@@ -31,10 +31,10 @@ public class Board
         }
         //Sets up all pieces
         for(int i = 1; i < 9; i++) {
-            chessBoard[6][i] = PieceHolder.getPiece("white",i-1);
-            chessBoard[7][i] = PieceHolder.getPiece("white",i+7);
-            chessBoard[1][i] = PieceHolder.getPiece("black",i-1);
-            chessBoard[0][i] = PieceHolder.getPiece("black",i+7);
+            chessBoard[6][i] = PieceHolder.retrievePiece("white",i-1);
+            chessBoard[7][i] = PieceHolder.retrievePiece("white",i+7);
+            chessBoard[1][i] = PieceHolder.retrievePiece("black",i-1);
+            chessBoard[0][i] = PieceHolder.retrievePiece("black",i+7);
         }
     }
     //Shows the board in its current state
@@ -125,7 +125,7 @@ public class Board
             }
             // Implements the commas between coordinates if necessary
             if(moves.size() == 2) {allMoves += rString.get(0);}
-            if(moves.size() == 4) {allMoves += rString.get(0) + " or " + rString.get(1);}
+            else if(moves.size() == 4) {allMoves += rString.get(0) + " or " + rString.get(1);}
             else {
                 for (int idx = 0; idx < rString.size(); idx++) {
                     allMoves += rString.get(idx);
@@ -222,7 +222,10 @@ public class Board
         System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
+        System.out.println("Position[0] is " + position[0]);
+        System.out.println("Position[1] is " + position[1]);
         PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
+        p.updateFirstMove();
         System.out.println();
         System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
@@ -233,6 +236,7 @@ public class Board
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
         PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
+        p.updateFirstMove();
         System.out.println();
         System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();

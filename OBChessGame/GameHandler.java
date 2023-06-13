@@ -7,13 +7,17 @@ public class GameHandler {
     public void runGame() {
         gameBoard.newGame();
         System.out.println();
-        //System.out.println(gameBoard.getPiece("H5").getColor());
         gameBoard.movePiece("H5","D5");
-       // System.out.println(gameBoard.getPiece("D5").getColor());
         gameBoard.showBoard();
-        System.out.println(Board.allMoves(gameBoard.getPiece("D5")));
+        System.out.println(Board.allMoves(gameBoard.getPiece("B1")));
+        System.out.println(Arrays.toString(gameBoard.getPiece("B1").getPose()));
+        gameBoard.movePiece("B1","D1");
         System.out.println();
+        gameBoard.showBoard();
+        System.out.println(Board.allMoves(gameBoard.getPiece("D1")));
+        System.out.println(gameBoard.getPiece("D1").possibleMoves());
         //int[] pickedPiece = PickPiece();
+
     }
     public void gameCycle() {
         gameBoard.newGame();

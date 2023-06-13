@@ -9,8 +9,8 @@ public class PieceHolder
     public PieceHolder()
     {
         int pieceNum = 0;
-        for (int i = 0; i < 8; i++) {
-            whitePieces[i] = new Pawn("white",6,i,pieceNum,i);
+        for (int i = 1; i < 9; i++) {
+            whitePieces[i-1] = new Pawn("white",6,i,pieceNum,i-1);
             pieceNum++;
         }
         //Sets up the white pieces from left to right
@@ -30,8 +30,8 @@ public class PieceHolder
         pieceNum++;
         whitePieces[pieceNum] = new Rook("white",7,8,1,15);
         pieceNum = 0;
-        for (int i = 0; i < 8; i++) {
-            blackPieces[i] = new Pawn("black",0,i,pieceNum,i);
+        for (int i = 1; i < 9; i++) {
+            blackPieces[i-1] = new Pawn("black",1,i,pieceNum,i-1);
             pieceNum++;
         }
         //Sets up the black pieces from left to right
@@ -53,7 +53,7 @@ public class PieceHolder
         //System.out.println(Arrays.toString(whitePieces));
     }
 
-    public static Piece getPiece(String color, int i) {
+    public static Piece retrievePiece(String color, int i) {
         color = color.toLowerCase();
         if (color.equals("white")) {return whitePieces[i];}
         else if (color.equals("black")) {return blackPieces[i];}
@@ -64,13 +64,13 @@ public class PieceHolder
         assert pose != null;
         return Board.getPiece(pose);
     }
-    public static void updatePosition(String color, int idx,int y,int x) {
+    public static void updatePosition(String color, int idx, int y, int x) {
         boolean white = color.toLowerCase().trim().equals("white");
         if (white) {
             whitePieces[idx].updatePose(y,x);
         }
         else {
-            whitePieces[idx].updatePose(y,x);
+            blackPieces[idx].updatePose(y,x);
         }
     }
     public static void setPiece(String color, String pieceName, int i) {

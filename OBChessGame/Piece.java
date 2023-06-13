@@ -52,10 +52,14 @@ public abstract class Piece
         yPose = y;
         xPose = x;
     }
-    public abstract ArrayList<Integer> possibleMoves();
+    //This is specifically for kings
     public ArrayList<Integer> availableMoves() {
         return possibleMoves();
     }
+    //This is specifically for pawns
+    public void updateFirstMove() {}
+    public abstract ArrayList<Integer> possibleMoves();
+
     public abstract String getType();
     @Override
     public String toString() {

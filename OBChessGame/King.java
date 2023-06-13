@@ -76,6 +76,9 @@ public class King extends Piece
         catch (Exception ignored) {
             //System.out.println("KING ERROR");
         }
+
+
+
         return possibleMoves;
     }
     public ArrayList<Integer> availableMoves() {
