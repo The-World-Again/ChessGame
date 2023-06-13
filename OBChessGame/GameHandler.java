@@ -7,36 +7,48 @@ public class GameHandler {
     public void runGame() {
         gameBoard.newGame();
         System.out.println();
-        gameBoard.movePiece("H5","D5");
-        gameBoard.showBoard();
-        System.out.println(Board.allMoves(gameBoard.getPiece("B1")));
-        System.out.println(Arrays.toString(gameBoard.getPiece("B1").getPose()));
-        gameBoard.movePiece("B1","D1");
-        System.out.println();
-        gameBoard.showBoard();
-        System.out.println(Board.allMoves(gameBoard.getPiece("D1")));
-        System.out.println(gameBoard.getPiece("D1").possibleMoves());
-        //int[] pickedPiece = PickPiece();
-
+        String og = pickPiece();
+        String newp = pickPosition(og);
+        gameBoard.movePiece(og,newp);
     }
     public void gameCycle() {
+        int i = 1;
+        int t = 0;
         gameBoard.newGame();
-        System.out.println();
+        while (!gameBoard.gameOver().equals("continue")) {
+            gameBoard.showBoard();
+            System.out.println();
+            System.out.println("Turn " + i);
+            System.out.println();
+            String og = pickPiece();
+            System.out.println(Board.allMoves(gameBoard.getPiece(og)));
+            String newp = pickPosition(og);
+            gameBoard.movePiece(og, newp);
+            if (t == 1) {
+                i++;
+                t = 0;
+            } else {
+                t++;
+            }
+        }
     }
-    public int[] PickPiece() {
+    public String pickPiece() {
         boolean white = (turnCount % 2 == 1);
         if (white) {
-            System.out.println("It is white's turn. \nSelect a piece to move\n");
+            System.out.println("It is white's turn \nSelect a piece to move\n");
         }
         else {
-            System.out.println("It is black's turn. \nSelect a piece to move\n");
+            System.out.println("It is black's turn \nSelect a piece to move\n");
         }
         boolean valid = false;
-        Piece p = new Information("PLACEHOLDER",0,0);
+        Piece p = new Information("TEMP",0,0);
+        String input = null;
 
         while (!valid) {
+            System.out.println();
+            gameBoard.showBoard();
             valid = true;
-            String input = sc.nextLine().trim();
+            input = sc.nextLine().trim();
 
             if (input.length() != 2) {
                 System.out.println("That is not a valid position");
@@ -66,27 +78,38 @@ public class GameHandler {
                     continue;
                 }
             }
-
+            if(tempPiece.possibleMoves().size()==0) {
+                System.out.println("That piece cannot move");
+                valid = false;
+                continue;
+            }
             p = tempPiece;
-        }
+        };
 
-        int[] piece = {p.getY(),p.getX()};
-        System.out.println(Arrays.toString(piece));
-        return piece;
+        return input;
     }
-    public int[] pickPosition() {
-        System.out.println("\nSelect a place to move that piece");
+    public String pickPosition(String p) {
         boolean valid = false;
-        int[] position = new int[2];
+        String pos = null;
+        Piece pp = gameBoard.getPiece(p);
+        System.out.println("\nSelect a place to move that " + pp.getType());
         while (!valid) {
+            System.out.println();
+            gameBoard.showBoard();
             valid = true;
-            position = gameBoard.boardPosition(sc.nextLine().trim());
+            pos = sc.nextLine().trim();
+            int[] position = gameBoard.boardPosition(pos);
             if (position == null) {
                 System.out.println("\nThat is not a valid spot");
                 valid = false;
                 continue;
             }
+            if (!gameBoard.validMove(pp, position)) {
+                System.out.println("\nThat is not a valid move");
+                valid = false;
+                continue;
+            }
         }
-        return position;
+        return pos;
     }
 }

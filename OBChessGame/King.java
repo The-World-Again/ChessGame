@@ -109,6 +109,9 @@ public class King extends Piece
         }
         return inCheck;
     }
+    public boolean getInCheck() {
+        return inCheck;
+    }
     @Override
     public String getType() {
         return "king";

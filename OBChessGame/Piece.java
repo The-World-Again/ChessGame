@@ -56,6 +56,7 @@ public abstract class Piece
     public ArrayList<Integer> availableMoves() {
         return possibleMoves();
     }
+    public boolean getInCheck() {return false;}
     //This is specifically for pawns
     public void updateFirstMove() {}
     public abstract ArrayList<Integer> possibleMoves();

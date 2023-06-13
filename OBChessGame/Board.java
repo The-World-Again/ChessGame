@@ -10,7 +10,7 @@ public class Board
     //Holds all game pieces for each color
     public void newGame() {
         setBoard();
-        showBoard();
+        //showBoard();
     }
     PieceHolder pieceHolder = new PieceHolder();
     public static void promote() {
@@ -202,8 +202,19 @@ public class Board
         }
         return new int[]{y,x};
     }
-    public boolean validMove(String s, Piece p) {
+    public boolean validMove(Piece p, String s) {
         int[] pos = boardPosition(s);
+        ArrayList<Integer> moves = p.possibleMoves();
+        for(int i = 0; i < p.possibleMoves().size();i += 2) {
+            assert pos != null;
+            if(moves.get(i).equals(pos[0]) && moves.get(i+1).equals(pos[1])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validMove(Piece p, int[] pos) {
         ArrayList<Integer> moves = p.possibleMoves();
         for(int i = 0; i < p.possibleMoves().size();i += 2) {
             assert pos != null;
@@ -219,26 +230,35 @@ public class Board
     public void movePiece(String ogPos, String newPos) {
         Piece p = getPiece(ogPos);
         int[] position = boardPosition(newPos);
-        System.out.println(p);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
-        System.out.println("Position[0] is " + position[0]);
-        System.out.println("Position[1] is " + position[1]);
+        PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
+        p.updateFirstMove();
+        System.out.println();
+        System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
+        System.out.println();
+        showBoard();
+        System.out.println();
+    }
+    public static void movePiece(int[] ogPos, int[] position) {
+        Piece p = chessBoard[ogPos[0]][ogPos[1]];
+        chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
+        chessBoard[position[0]][position[1]] = p;
         PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
         p.updateFirstMove();
         System.out.println();
         System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
     }
-    public static void movePiece(int[] ogPos, int[] position) {
-        Piece p = chessBoard[ogPos[0]][ogPos[1]];
-        System.out.println(p);
-        chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
-        chessBoard[position[0]][position[1]] = p;
-        PieceHolder.updatePosition(p.getColor(),p.getIndex(),position[0],position[1]);
-        p.updateFirstMove();
-        System.out.println();
-        System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
-        System.out.println();
+    public String gameOver() {
+        if (getPiece(findPiece("wk")).getInCheck() && getPiece(findPiece("wk")).availableMoves().size()==0) {
+            return "white";
+        }
+        else if (getPiece(findPiece("bk")).getInCheck() && getPiece(findPiece("bk")).availableMoves().size()==0) {
+            return "black";
+        }
+        else {
+            return "continue";
+        }
     }
 }
