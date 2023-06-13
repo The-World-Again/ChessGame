@@ -12,6 +12,6 @@ public class GameRunner
     public static void main(String[] args)
     {
         GameHandler game = new GameHandler();
-        game.runGame();
+        game.gameCycle();
     }
 }

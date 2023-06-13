@@ -3,37 +3,38 @@ import java.util.Scanner;
 public class GameHandler {
     static Scanner sc = new Scanner(System.in);
     static int turnCount = 1;
+    static int playerTurn = 0;
     Board gameBoard = new Board();
-    public void runGame() {
+    public void testGame() {
         gameBoard.newGame();
         System.out.println();
         String og = pickPiece();
         String newp = pickPosition(og);
         gameBoard.movePiece(og,newp);
+        System.out.println(gameBoard.gameOver());
     }
     public void gameCycle() {
-        int i = 1;
-        int t = 0;
+        turnCount = 1;
+        playerTurn = 0;
         gameBoard.newGame();
-        while (!gameBoard.gameOver().equals("continue")) {
-            gameBoard.showBoard();
-            System.out.println();
-            System.out.println("Turn " + i);
+        while (gameBoard.gameOver().equals("continue")) {
+            System.out.println("Turn " + turnCount + ": ");
             System.out.println();
             String og = pickPiece();
             System.out.println(Board.allMoves(gameBoard.getPiece(og)));
             String newp = pickPosition(og);
             gameBoard.movePiece(og, newp);
-            if (t == 1) {
-                i++;
-                t = 0;
+            if (playerTurn == 1) {
+                turnCount++;
+                playerTurn = 0;
             } else {
-                t++;
+                playerTurn++;
             }
+            System.out.println("looped");
         }
     }
     public String pickPiece() {
-        boolean white = (turnCount % 2 == 1);
+        boolean white = (playerTurn % 2 == 0);
         if (white) {
             System.out.println("It is white's turn \nSelect a piece to move\n");
         }
@@ -45,7 +46,6 @@ public class GameHandler {
         String input = null;
 
         while (!valid) {
-            System.out.println();
             gameBoard.showBoard();
             valid = true;
             input = sc.nextLine().trim();
