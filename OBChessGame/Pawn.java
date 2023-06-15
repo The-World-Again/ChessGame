@@ -23,24 +23,22 @@ public class Pawn extends Piece
         if (this.getColor().equals("black")) {x = 1;}
         try {
             //In front
-            if (board[pose[0]+x][pose[1]].getName().equals("___") && pose[0]+x >= 0) {
+            if ((pose[0]+x >= 0) && board[pose[0]+x][pose[1]].getName().equals("___")) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]);
             }
             //Double move for first
-            if(firstMove && board[pose[0]+(2*x)][pose[1]].getName().equals("___") && pose[0]+(2*x) >= 0) {
+            if((pose[0]+(2*x) >= 0) && firstMove && board[pose[0]+(2*x)][pose[1]].getName().equals("___")) {
                 possibleMoves.add(pose[0]+(2*x));
                 possibleMoves.add(pose[1]);
             }
             //Left take
-            if (board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()) &&
-            pose[0]+x >= 0 && pose[1]-x <= 8) {
+            if ((pose[0]+x >= 0 && pose[1]-x <= 8) && (board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]-x);
             }
             //Right take
-            if (board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()) &&
-            pose[0]+x >= 0 && pose[1]+x <= 8) {
+            if ((pose[0]+x >= 0 && pose[1]+x <= 8) && (board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()))) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]+x);
             }
