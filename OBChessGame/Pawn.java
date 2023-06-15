@@ -57,8 +57,8 @@ public class Pawn extends Piece
     @Override
     public String toString() {
         if (this.getColor().equals("white")) {
-            return "wp"+(this.getNum()+1);
+            return "wp"+(this.getNum());
         }
-        else return "bp"+(this.getNum()+1);
+        else return "bp"+(this.getNum());
     }
 }

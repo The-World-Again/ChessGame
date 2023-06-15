@@ -10,8 +10,8 @@ public class Board
     static Piece[][] chessBoard = new Piece[9][9];
     static Scanner sc = new Scanner(System.in);
     //Holds the number to give a piece
-    //Organized in order of knight, bishop, rook, queen
-    private static int[] promoteCounter = {2,2,2,1};
+    //Organized in order of knight, bishop, rook, queen, with white pieces first
+    private static int[] promoteCounter = {3,3,3,2,3,3,3,2};
     //Holds all game pieces for each color
     public void newGame() {
         setBoard();
@@ -23,6 +23,7 @@ public class Board
         //Establishes coordinates
         String[] letters = {"A","B","C","D","E","F","G","H"};
         String[] numbers = {"1","2","3","4","5","6","7","8"};
+        chessBoard = new Piece[9][9];
         for (int r = 0; r < chessBoard.length; r++) {
             for (int c = 0; c < chessBoard[0].length; c++) {
                 chessBoard[r][c] = new Information("___",r,c);
@@ -287,27 +288,35 @@ public class Board
         String c = p.getColor();
         int i = 999999;
         int idx = p.getIndex();
+        int k = 0;
+        if(c.equals("black")) {
+            k = 4;
+        }
+
         if(s.equals("k")) {
-            i = promoteCounter[0];
-            promoteCounter[0]++;
+            i = promoteCounter[k];
+            promoteCounter[k]++;
             System.out.println(i);
             chessBoard[pose[0]][pose[1]] = new Knight(c,pose[0],pose[1],i,idx);
         }
         if(s.equals("b")) {
-            i = promoteCounter[1];
-            promoteCounter[1]++;
+            i = promoteCounter[1+k];
+            promoteCounter[1+k]++;
             chessBoard[pose[0]][pose[1]] = new Bishop(c,pose[0],pose[1],i,idx);
         }
         if(s.equals("r")) {
-            i = promoteCounter[2];
-            promoteCounter[2]++;
+            i = promoteCounter[2+k];
+            promoteCounter[2+k]++;
             chessBoard[pose[0]][pose[1]] = new Rook(c,pose[0],pose[1],i,idx);
         }
         if(s.equals("q")) {
-            i = promoteCounter[3];
-            promoteCounter[3]++;
+            i = promoteCounter[3+k];
+            promoteCounter[3+k]++;
             chessBoard[pose[0]][pose[1]] = new Queen(c,pose[0],pose[1],i,idx);
         }
+    }
+    public static void resetPromotions() {
+        promoteCounter = new int[]{3,3,3,2,3,3,3,2};
     }
     public String gameOver() {
         if (findPiece("wk") == null) {

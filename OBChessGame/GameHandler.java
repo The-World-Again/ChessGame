@@ -9,13 +9,14 @@ public class GameHandler {
     public void testGame() {
         gameBoard.newGame();
         System.out.println();
-        gameBoard.promote(new int[]{6,1});
+        gameBoard.promote(new int[]{1,1});
         gameBoard.showBoard();
     }
     public void gameCycle() {
         turnCount = 1;
         playerTurn = 0;
         gameBoard.newGame();
+        Board.resetPromotions();
         while (gameBoard.gameOver().equals("continue")) {
             System.out.println("Turn " + turnCount + ": ");
             System.out.println();
