@@ -20,14 +20,17 @@ public class GameHandler {
         while (gameBoard.gameOver().equals("continue")) {
             System.out.println("Turn " + turnCount + ": ");
             System.out.println();
-            String og = pickPiece();
-            if(Board.findPiece(og)!=null) {
-                System.out.println(Board.allMoves(Board.findPiece(og)));
+            String og = null;
+            String newp = "x";
+            while(newp.equals("x")) {
+                og = pickPiece();
+                if (Board.findPiece(og) != null) {
+                    System.out.println(Board.allMoves(Board.findPiece(og)));
+                } else {
+                    System.out.println(Board.allMoves(gameBoard.getPiece(og)));
+                }
+                newp = pickPosition(og);
             }
-            else {
-                System.out.println(Board.allMoves(gameBoard.getPiece(og)));
-            }
-            String newp = pickPosition(og);
             gameBoard.movePiece(og, newp);
             int[] pp = gameBoard.checkPromotions();
             if(pp != null) {
@@ -132,11 +135,16 @@ public class GameHandler {
             pp = gameBoard.getPiece(p);
         }
         System.out.println("\nSelect a place to move that " + pp.getType());
+        System.out.println("Type \"X\" to select a different piece");
+        System.out.println();
         while (!valid) {
             gameBoard.showBoard();
             valid = true;
-            pos = sc.nextLine().trim();
+            pos = sc.nextLine().trim().toLowerCase();
             int[] position = gameBoard.boardPosition(pos);
+            if (pos.equals("x")) {
+                return "x";
+            }
             if (position == null) {
                 System.out.println("\nThat is not a valid spot");
                 valid = false;

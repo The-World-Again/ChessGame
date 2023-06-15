@@ -101,13 +101,13 @@ public class Queen extends Piece
             if(getNum() > 1) {
                 return "wq" + (this.getNum());
             }
-            return "wq";
+            return "wq ";
         }
         else {
             if(getNum()>1) {
                 return "bq"+(this.getNum());
             }
-            return "bq";
+            return "bq ";
         }
     }
 }
