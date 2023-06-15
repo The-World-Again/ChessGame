@@ -53,17 +53,6 @@ public abstract class Piece
         yPose = y;
         xPose = x;
     }
-    public void flipColor(String c) {
-        if (c.equals("white")) {
-            color = "black";
-        }
-        else if (c.equals("black")) {
-            color = "white";
-        }
-        else {
-            System.out.println("not a color");
-        }
-    }
     //This is specifically for pawns
     public void updateFirstMove() {}
     public abstract ArrayList<Integer> possibleMoves();

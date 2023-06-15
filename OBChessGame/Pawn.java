@@ -52,7 +52,7 @@ public class Pawn extends Piece
         return possibleMoves;
     }
     public void updateFirstMove() {
-        firstMove = false;
+        firstMove = !firstMove;
     }
     @Override
     public String getType() {
