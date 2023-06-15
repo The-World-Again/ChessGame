@@ -23,8 +23,8 @@ public class Queen extends Piece
         try {
             //Orthogonal movement
             //Up
-            for (int y = 1; board[pose[0]-y][pose[1]].getName().equals("___") ||
-                    board[pose[0]-y][pose[1]].getColor().equals(this.otherColor()); y++) {
+            for (int y = 1; (pose[0]-y >= 0) && (board[pose[0]-y][pose[1]].getName().equals("___") ||
+                    board[pose[0]-y][pose[1]].getColor().equals(this.otherColor())); y++) {
                 possibleMoves.add(pose[0] - y);
                 possibleMoves.add(pose[1]);
                 if (board[pose[0]-y][pose[1]].getColor().equals(this.otherColor()) ||
@@ -55,8 +55,8 @@ public class Queen extends Piece
 
             //Diagonal movement
             //Top left
-            for(int x = 1; board[pose[0]-x][pose[1]-x].getName().equals("___") ||
-                    board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor()); x++) {
+            for(int x = 1; (pose[0]-x >= 0) && (board[pose[0]-x][pose[1]-x].getName().equals("___") ||
+                    board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor())); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]-x);
                 if (board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor()) ||

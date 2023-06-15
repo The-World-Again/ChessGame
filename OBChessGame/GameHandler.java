@@ -25,9 +25,9 @@ public class GameHandler {
             while(newp.equals("x")) {
                 og = pickPiece();
                 if (Board.findPiece(og) != null) {
-                    System.out.println(Board.allMoves(Board.findPiece(og)));
+                    System.out.print(Board.allMoves(Board.findPiece(og)));
                 } else {
-                    System.out.println(Board.allMoves(gameBoard.getPiece(og)));
+                    System.out.print(Board.allMoves(gameBoard.getPiece(og)));
                 }
                 newp = pickPosition(og);
             }
@@ -52,6 +52,9 @@ public class GameHandler {
             score[1]++;
         }
         System.out.println("Play again?\nY/N");
+        System.out.println("Scores");
+        System.out.println("White: " + score[0]);
+        System.out.print(", Black: " + score[1]);
         System.out.println();
         String s = sc.nextLine().trim().toLowerCase();
         while (!s.equals("y") && !s.equals("n")) {

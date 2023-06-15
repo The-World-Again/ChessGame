@@ -23,7 +23,7 @@ public class Bishop extends Piece
         int[] pose = this.getPose();
         try {
             //Top left
-            for (int x = 1; (pose[0]-x <= 0) && (board[pose[0]-x][pose[1]-x].getName().equals("___") ||
+            for (int x = 1; (pose[0]-x >= 0) && (board[pose[0]-x][pose[1]-x].getName().equals("___") ||
                     board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor())); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]-x);
