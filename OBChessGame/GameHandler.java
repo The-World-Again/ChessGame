@@ -9,6 +9,8 @@ public class GameHandler {
     public void testGame() {
         gameBoard.newGame();
         System.out.println();
+        gameBoard.promote(new int[]{6,1});
+        gameBoard.showBoard();
     }
     public void gameCycle() {
         turnCount = 1;
@@ -27,6 +29,10 @@ public class GameHandler {
             }
             String newp = pickPosition(og);
             gameBoard.movePiece(og, newp);
+            int[] pp = gameBoard.checkPromotions();
+            if(pp != null) {
+                gameBoard.promote(pp);
+            }
             if (playerTurn == 1) {
                 turnCount++;
                 playerTurn = 0;
@@ -47,6 +53,7 @@ public class GameHandler {
         String s = sc.nextLine().trim().toLowerCase();
         while (!s.equals("y") && !s.equals("n")) {
             System.out.println("Play again?\nY/N");
+            s = sc.nextLine().trim().toLowerCase();
             System.out.println();
         }
         if (s.equals("y")) {

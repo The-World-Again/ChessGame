@@ -3,19 +3,21 @@
  * @Ori
  */
 import java.util.*;
+import java.util.Scanner;
 public class Board
 {
     //2D array representing the board
     static Piece[][] chessBoard = new Piece[9][9];
+    static Scanner sc = new Scanner(System.in);
+    //Holds the number to give a piece
+    //Organized in order of knight, bishop, rook, queen
+    private static int[] promoteCounter = {2,2,2,1};
     //Holds all game pieces for each color
     public void newGame() {
         setBoard();
         //showBoard();
     }
     PieceHolder pieceHolder = new PieceHolder();
-    public static void promote() {
-        System.out.println("That pawn has become a PLACEHOLDER");
-    }
     //Sets up the board for use
     public void setBoard() {
         //Establishes coordinates
@@ -255,6 +257,57 @@ public class Board
         System.out.println();
         System.out.println("The " + p.getColor() + " " + p.getName() + " has been moved to " + poseBuilder(position[0]) + position[1]);
         System.out.println();
+    }
+    public int[] checkPromotions() {
+        for(Piece[] pieces : chessBoard) {
+            for(Piece p : pieces) {
+                if(p.getType().equals("pawn")) {
+                    if((p.getColor().equals("white") && p.getY()==0) ||
+                            p.getColor().equals("black") && p.getY()==7) {
+                        return p.getPose();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    public void promote(int[] pose) {
+        System.out.println("Pick a piece to promote that pawn into");
+        System.out.println("(K)night, (B)ishop, (R)ook, or (Q)ueen");
+        String s = sc.nextLine().trim().toLowerCase();
+        while (!s.equals("k") && !s.equals("b") && !s.equals("r") && !s.equals("q")) {
+            System.out.println("Please select either a (K)night, (B)ishop, (R)ook, or (Q)ueen");
+            s = sc.nextLine().trim().toLowerCase();
+            System.out.println();
+        }
+        setPiece(chessBoard[pose[0]][pose[1]],s);
+    }
+    public void setPiece(Piece p, String s) {
+        int[] pose = p.getPose();
+        String c = p.getColor();
+        int i = 999999;
+        int idx = p.getIndex();
+        if(s.equals("k")) {
+            i = promoteCounter[0];
+            promoteCounter[0]++;
+            System.out.println(i);
+            chessBoard[pose[0]][pose[1]] = new Knight(c,pose[0],pose[1],i,idx);
+        }
+        if(s.equals("b")) {
+            i = promoteCounter[1];
+            promoteCounter[1]++;
+            chessBoard[pose[0]][pose[1]] = new Bishop(c,pose[0],pose[1],i,idx);
+        }
+        if(s.equals("r")) {
+            i = promoteCounter[2];
+            promoteCounter[2]++;
+            chessBoard[pose[0]][pose[1]] = new Rook(c,pose[0],pose[1],i,idx);
+        }
+        if(s.equals("q")) {
+            i = promoteCounter[3];
+            promoteCounter[3]++;
+            chessBoard[pose[0]][pose[1]] = new Queen(c,pose[0],pose[1],i,idx);
+        }
     }
     public String gameOver() {
         if (findPiece("wk") == null) {
