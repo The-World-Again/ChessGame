@@ -16,7 +16,6 @@ public class GameHandler {
         turnCount = 1;
         playerTurn = 0;
         gameBoard.newGame();
-        gameBoard.movePiece("wq","A5");
         while (gameBoard.gameOver().equals("continue")) {
             System.out.println("Turn " + turnCount + ": ");
             System.out.println();
