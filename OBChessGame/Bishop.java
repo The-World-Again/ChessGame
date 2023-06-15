@@ -22,22 +22,23 @@ public class Bishop extends Piece
         Piece[][] board = Board.getBoard();
         int[] pose = this.getPose();
         try {
-            for (int x = 1; board[pose[0]-x][pose[1]-x].getName().equals("___") ||
-                    board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor()); x++) {
+            //Top left
+            for (int x = 1; (pose[0]-x <= 0) && (board[pose[0]-x][pose[1]-x].getName().equals("___") ||
+                    board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor())); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]-x);
                 if (board[pose[0]-x][pose[1]-x].getColor().equals(this.otherColor()) ||
                 pose[0]-x-1 < 0) {break;}
             }
-
-            for (int x = 1; board[pose[0]-x][pose[1]+x].getName().equals("___") ||
-                    board[pose[0]-x][pose[1]+x].getColor().equals(this.otherColor()); x++) {
+            //Top right
+            for (int x = 1; (pose[0]-x >= 0 && pose[1]+x < 9) && (board[pose[0]-x][pose[1]+x].getName().equals("___") ||
+                    board[pose[0]-x][pose[1]+x].getColor().equals(this.otherColor())); x++) {
                 possibleMoves.add(pose[0]-x);
                 possibleMoves.add(pose[1]+x);
                 if (board[pose[0]-x][pose[1]+x].getColor().equals(this.otherColor()) ||
                         pose[0]-x-1 < 0 || pose[1]+x+1 > 8) {break;}
             }
-
+            //Bottom left
             for (int x = 1; board[pose[0]+x][pose[1]-x].getName().equals("___") ||
                     board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()); x++) {
                 possibleMoves.add(pose[0]+x);
@@ -45,9 +46,9 @@ public class Bishop extends Piece
                 if (board[pose[0]+x][pose[1]-x].getColor().equals(this.otherColor()) ||
                 pose[0]+x+1 < 0 || pose[1]-x-1 > 8) {break;}
             }
-
-            for (int x = 1; board[pose[0]+x][pose[1]+x].getName().equals("___") ||
-                    board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()); x++) {
+            //Bottom right
+            for (int x = 1; pose[1]+x < 9 && (board[pose[0]+x][pose[1]+x].getName().equals("___") ||
+                    board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor())); x++) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]+x);
                 if (board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()) ||
@@ -55,7 +56,7 @@ public class Bishop extends Piece
             }
         }
         catch (Exception ignored) {
-            //System.out.println("BISHOP ERROR");
+            System.out.println("BISHOP ERROR");
         }
         return possibleMoves;
     }

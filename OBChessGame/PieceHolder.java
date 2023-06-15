@@ -60,7 +60,7 @@ public class PieceHolder
         else {System.out.println("not a color"); return null;}
     }
     public static Piece getPiece(String name) {
-        int[] pose = Board.findPiece(name);
+        int[] pose = Board.findPiece(name).getPose();
         assert pose != null;
         return Board.getPiece(pose);
     }

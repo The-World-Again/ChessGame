@@ -83,7 +83,7 @@ public class Board
         // The first number of each pair is turned into a letter, then is concatenated with the second number
         String tempLetter = "";
         ArrayList<String> letters = new ArrayList<String>();
-        ArrayList<Integer> moves = p.availableMoves();
+        ArrayList<Integer> moves = p.possibleMoves();
         for (int i = 1; i < moves.size() + 1; i++) {
             if (i % 2 != 0) {
                 tempLetter = poseBuilder(moves.get(i - 1));
@@ -172,12 +172,12 @@ public class Board
         return chessBoard[pose[0]][pose[1]];
     }
     //Finds a requested piece
-    public static int[] findPiece(String name) {
+    public static Piece findPiece(String name) {
         name = name.toLowerCase().trim();
         for(Piece[] pieces : chessBoard) {
             for(Piece p : pieces) {
                 if (p.toString().trim().equals(name)) {
-                    return p.getPose();
+                    return p;
                 }
             }
         }
@@ -228,7 +228,13 @@ public class Board
     //Moves a piece to a new position
     //Checks if the words are the right size and fit on the board
     public void movePiece(String ogPos, String newPos) {
-        Piece p = getPiece(ogPos);
+        Piece p = null;
+        if (findPiece(ogPos) != null) {
+            p = findPiece(ogPos);
+        }
+        else {
+            p = getPiece(ogPos);
+        }
         int[] position = boardPosition(newPos);
         chessBoard[p.getY()][p.getX()] = new Information("___", p.getY(), p.getX());
         chessBoard[position[0]][position[1]] = p;
@@ -251,11 +257,11 @@ public class Board
         System.out.println();
     }
     public String gameOver() {
-        if (getPiece(findPiece("wk")).getInCheck() && getPiece(findPiece("wk")).availableMoves().size()==0) {
-            return "white";
+        if (findPiece("wk") == null) {
+            return "b";
         }
-        else if (getPiece(findPiece("bk")).getInCheck() && getPiece(findPiece("bk")).availableMoves().size()==0) {
-            return "black";
+        else if (findPiece("bk") == null) {
+            return "w";
         }
         else {
             return "continue";

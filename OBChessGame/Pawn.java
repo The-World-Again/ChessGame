@@ -36,13 +36,13 @@ public class Pawn extends Piece
                 possibleMoves.add(pose[1]-x);
             }
             if (board[pose[0]+x][pose[1]+x].getColor().equals(this.otherColor()) &&
-            pose[0]+x >= 0 && pose[1]-x <= 8) {
+            pose[0]+x >= 0 && pose[1]+x <= 8) {
                 possibleMoves.add(pose[0]+x);
                 possibleMoves.add(pose[1]+x);
             }
         }
         catch (Exception ignored) {
-           // System.out.println("PAWN ERROR");
+           System.out.println("PAWN ERROR");
         }
 
         return possibleMoves;

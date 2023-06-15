@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Abstract class Piece - Abstract that all game pieces are
@@ -52,11 +53,17 @@ public abstract class Piece
         yPose = y;
         xPose = x;
     }
-    //This is specifically for kings
-    public ArrayList<Integer> availableMoves() {
-        return possibleMoves();
+    public void flipColor(String c) {
+        if (c.equals("white")) {
+            color = "black";
+        }
+        else if (c.equals("black")) {
+            color = "white";
+        }
+        else {
+            System.out.println("not a color");
+        }
     }
-    public boolean getInCheck() {return false;}
     //This is specifically for pawns
     public void updateFirstMove() {}
     public abstract ArrayList<Integer> possibleMoves();

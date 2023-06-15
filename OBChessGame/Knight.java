@@ -38,14 +38,14 @@ public class Knight extends Piece
                 }
                 if (i > 4) {down = true;}
                 if (down) {y *= -1;}
-                if (board[pose[0]+y][pose[1]+x].getName().equals("___") ||
-                        board[pose[0]+y][pose[1]+x].getColor().equals(this.otherColor())) {
+                if ((pose[0]+y >= 0 && pose[1]+y < 9) && (board[pose[0]+y][pose[1]+x].getName().equals("___") ||
+                        board[pose[0]+y][pose[1]+x].getColor().equals(this.otherColor()))) {
                     possibleMoves.add(pose[0]+y);
                     possibleMoves.add(pose[1]+x);
                 }
             }
             catch (Exception ignored) {
-                //System.out.println("KNIGHT ERROR");
+                System.out.println("KNIGHT ERROR");
             }
         }
         return possibleMoves;
