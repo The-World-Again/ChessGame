@@ -9,15 +9,12 @@ public class GameHandler {
     public void testGame() {
         gameBoard.newGame();
         System.out.println();
-        gameBoard.movePiece("wq","d8");
-        gameBoard.movePiece("bp7","C7");
-        System.out.println(Board.allMoves(Board.findPiece("wq")));
-        System.out.println(gameBoard.gameOver());
     }
     public void gameCycle() {
         turnCount = 1;
         playerTurn = 0;
         gameBoard.newGame();
+        gameBoard.movePiece("wq","A5");
         while (gameBoard.gameOver().equals("continue")) {
             System.out.println("Turn " + turnCount + ": ");
             System.out.println();
@@ -47,11 +44,12 @@ public class GameHandler {
         }
         System.out.println("Play again?\nY/N");
         System.out.println();
-        while (!sc.nextLine().toLowerCase().equals("y") || !sc.nextLine().toLowerCase().equals("n")) {
+        String s = sc.nextLine().trim().toLowerCase();
+        while (!s.equals("y") && !s.equals("n")) {
             System.out.println("Play again?\nY/N");
             System.out.println();
         }
-        if (sc.nextLine().toLowerCase().equals("y")) {
+        if (s.equals("y")) {
             gameCycle();
         }
     }
