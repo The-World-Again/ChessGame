@@ -53,8 +53,8 @@ public class GameHandler {
         }
         System.out.println("Play again?\nY/N");
         System.out.println("Scores");
-        System.out.println("White: " + score[0]);
-        System.out.print(", Black: " + score[1]);
+        System.out.print("White: " + score[0]);
+        System.out.println(", Black: " + score[1]);
         System.out.println();
         String s = sc.nextLine().trim().toLowerCase();
         while (!s.equals("y") && !s.equals("n")) {
